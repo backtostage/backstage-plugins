@@ -43,16 +43,13 @@ async function main() {
     console.log(`Latest Pre-release version is: ${latestPreRelease.name}, published on: ${latestPreRelease.published_at}`)
     console.log()
 
-    const latestReleaseDate = new Date(latestRelease.published_at).getTime()
-    const latestPreReleaseDate = new Date(latestPreRelease.published_at).getTime()
-    if (latestReleaseDate > latestPreReleaseDate){
-        console.log(`Latest Release is newer than latest Pre-release, using Latest Release name ${latestRelease.name}`)
+    if(process.argv[2] == 'main') {
+        console.log(`Latest Release selected to run in workflow, using Latest Release name ${latestRelease.name}`)
         console.log()
 
         await fs.appendFile(process.env.GITHUB_OUTPUT, `release_version=${latestRelease.name.substring(1)}${EOL}`);
-    }
-    else {
-        console.log(`Latest Release is older than latest Pre-release, using Latest Pre-release name ${latestPreRelease.name}`)
+    } else {
+        console.log(`Pre-release selected to run in workflow, using Pre-release name ${latestRelease.name}`)
         console.log()
 
         await fs.appendFile(process.env.GITHUB_OUTPUT, `release_version=${latestPreRelease.name.substring(1)}${EOL}`);
