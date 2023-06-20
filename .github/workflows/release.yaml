@@ -28,7 +28,7 @@ jobs:
         run: yarn tsc
 
       - name: Build packages
-        run: yarn build
+        run: yarn build:all
 
       - name: Enable non-immutable yarn installs
         run: yarn config set -H enableImmutableInstalls false
