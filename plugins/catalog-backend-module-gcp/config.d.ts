@@ -22,11 +22,15 @@ export interface Config {
          * Default: `component`.
          */
         componentLabel?: string;
-        /**
-         * (Optional) The provider will set the Resource type based in this information.
-         * Default: `CloudSQL`.
-         */
-        resourceType?: string;
+
+        cloudsql?: {
+          /**
+           * (Optional) The provider will set the Resource type based in this information.
+           * Default: `CloudSQL`.
+           */
+          resourceType?: string;
+        }
+
         /**
          * (Optional) TaskScheduleDefinition for the refresh.
          */

@@ -37,7 +37,7 @@ export function readProviderConfig(
     const project = config.getString("project");
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
-    const resourceType = config.getOptionalString('resourceType') ?? 'CloudSQL'
+    const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
 
     const schedule = config.has('schedule')
         ? readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'))

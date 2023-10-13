@@ -42,7 +42,7 @@ describe('readProviderConfigs', () => {
                             project: 'my-other-project',
                             ownerLabel: 'team',
                             componentLabel: 'app',
-                            resourceType: 'SQL',
+                            cloudsql: { resourceType: 'SQL',},
                             schedule: {
                                 frequency: { minutes: 30 },
                                 timeout: { minutes: 3 },
