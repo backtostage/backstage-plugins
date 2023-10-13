@@ -1,5 +1,5 @@
-import {ConfigReader} from '@backstage/config';
-import {readProviderConfigs} from "./GoogleSQLDatabaseEntityProviderConfig";
+import { ConfigReader } from '@backstage/config';
+import { readProviderConfigs } from "./GoogleSQLDatabaseEntityProviderConfig";
 
 describe('readProviderConfigs', () => {
     afterEach(() => jest.resetAllMocks());
@@ -7,7 +7,7 @@ describe('readProviderConfigs', () => {
 
     it('no provider config', () => {
         const config = new ConfigReader({});
-        const providerConfigs = readProviderConfigs({config});
+        const providerConfigs = readProviderConfigs({ config });
 
         expect(providerConfigs).toHaveLength(0);
     });
@@ -16,13 +16,13 @@ describe('readProviderConfigs', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: {
-                        'my-project': {},
-                    },
+                    gcp: [
+                        { project: 'my-project' },
+                    ],
                 },
             },
         });
-        const providerConfigs = readProviderConfigs({config});
+        const providerConfigs = readProviderConfigs({ config });
 
         expect(providerConfigs).toHaveLength(1);
         expect(providerConfigs[0].project).toEqual('my-project');
@@ -36,22 +36,23 @@ describe('readProviderConfigs', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: {
-                        'my-project': {},
-                        'my-other-project': {
+                    gcp: [
+                        { project: 'my-project' },
+                        {
+                            project: 'my-other-project',
                             ownerLabel: 'team',
                             componentLabel: 'app',
                             resourceType: 'SQL',
                             schedule: {
-                                frequency: {minutes: 30},
-                                timeout: {minutes: 3},
+                                frequency: { minutes: 30 },
+                                timeout: { minutes: 3 },
                             },
                         },
-                    },
+                    ],
                 }
             },
         });
-        const providerConfigs = readProviderConfigs({config});
+        const providerConfigs = readProviderConfigs({ config });
 
         expect(providerConfigs).toHaveLength(2);
         expect(providerConfigs[0]).toEqual({
@@ -69,7 +70,7 @@ describe('readProviderConfigs', () => {
             resourceType: 'SQL',
             resourceTransformer: expect.any(Function),
             schedule: {
-                frequency: { minutes: 30},
+                frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
             },
         });

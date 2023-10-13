@@ -1,4 +1,4 @@
-import {Config} from "@backstage/config";
+import { Config } from "@backstage/config";
 import {
     defaultDatabaseResourceTransformer,
     GoogleDatabaseResourceTransformer
@@ -22,23 +22,19 @@ export function readProviderConfigs(options: {
     resourceTransformer?: GoogleDatabaseResourceTransformer
 }): GoogleSQLDatabaseEntityProviderConfig[] {
 
-    const providersConfig = options.config.getOptionalConfig('catalog.providers.gcp');
+    const providersConfig = options.config.getOptionalConfigArray('catalog.providers.gcp');
     if (!providersConfig) {
         return [];
     }
 
-    return providersConfig.keys().map(project => {
-        const providerConfig = providersConfig.getConfig(project);
-
-        return readProviderConfig(project, providerConfig, options.resourceTransformer);
-    });
+    return providersConfig.map(config => readProviderConfig(config, options.resourceTransformer));
 }
 
 export function readProviderConfig(
-    project: string,
     config: Config,
     resourceTransformer?: GoogleDatabaseResourceTransformer
 ): GoogleSQLDatabaseEntityProviderConfig {
+    const project = config.getString("project");
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('resourceType') ?? 'CloudSQL'
