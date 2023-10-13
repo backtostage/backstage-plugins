@@ -1,10 +1,10 @@
-import {GoogleSQLDatabaseEntityProvider} from "./GoogleSQLDatabaseEntityProvider";
-import {TaskInvocationDefinition, TaskRunner,} from '@backstage/backend-tasks';
-import {ConfigReader} from '@backstage/config';
-import {getVoidLogger} from '@backstage/backend-common';
-import {EntityProviderConnection} from '@backstage/plugin-catalog-node';
+import { GoogleSQLDatabaseEntityProvider } from "./GoogleSQLDatabaseEntityProvider";
+import { TaskInvocationDefinition, TaskRunner, } from '@backstage/backend-tasks';
+import { ConfigReader } from '@backstage/config';
+import { getVoidLogger } from '@backstage/backend-common';
+import { EntityProviderConnection } from '@backstage/plugin-catalog-node';
 import * as helpers from '../lib/sqladmin';
-import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION} from '@backstage/catalog-model';
+import { ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION } from '@backstage/catalog-model';
 
 
 jest.mock('../lib/sqladmin', () => {
@@ -52,9 +52,9 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: {
-                        project: {},
-                    },
+                    gcp: [{
+                        project: 'project',
+                    }],
                 },
             },
         });
@@ -73,10 +73,10 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: {
-                        myProvider: {},
-                        anotherProvider: {},
-                    },
+                    gcp: [
+                        { project: 'myProvider' },
+                        { project: 'anotherProvider' },
+                    ],
                 },
             },
         });
@@ -99,9 +99,9 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: {
-                        myProvider: {},
-                    },
+                    gcp: [{
+                        project: 'myProvider',
+                    }],
                 },
             },
         });

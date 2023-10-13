@@ -45,7 +45,7 @@ export default async function createPlugin(
 ## Configuration
 
 To use this provider, you'll need a [Google Service Account](https://cloud.google.com/iam/docs/service-account-overview).
-Once generated, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. 
+Once generated, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
 
 You can find more details about this in the [official docs](https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest#impersonated-credentials-client)
@@ -57,10 +57,11 @@ catalog:
   providers:
     gcp:
       # the project id need to be the GCP Project where your Resources are present
-      project:
-        ownerLabel: 'team' # string
-        componentLabel: 'app' # string
-        resourceType: 'SQL' # string
+      - project: my-gcp-project-id
+        ownerLabel: team # string
+        componentLabel: app # string
+        cloudsql:
+          resourceType: SQL  # string
         schedule: # optional; same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
@@ -68,21 +69,22 @@ catalog:
           timeout: { minutes: 3 }
 ```
 
-This provider supports multiple projects using different names at the root level.
+This provider supports multiple projects using different configurations.
 
 - **`project`** _(required)_:
   Project ID of the project for which to list Cloud SQL instances.
 - **`ownerLabel`** _(optional)_:
-  - Default: `owner`. 
-  - The provider will look for user defined labels to find the [Resource Owner](https://backstage.io/docs/features/software-catalog/descriptor-format#specowner-required-2). 
+  - Default: `owner`.
+  - The provider will look for user defined labels to find the [Resource Owner](https://backstage.io/docs/features/software-catalog/descriptor-format#specowner-required-2).
   - You can provide the label name where the owner name is present, if the label isn't present the owner will be set `unknown`.
 - **`componentLabel`** _(optional)_:
-  - Default: `component`. 
-  - The provider will look for user defined labels to find the Resource [dependencyOf](https://backstage.io/docs/features/software-catalog/well-known-relations#dependson-and-dependencyof). 
+  - Default: `component`.
+  - The provider will look for user defined labels to find the Resource [dependencyOf](https://backstage.io/docs/features/software-catalog/well-known-relations#dependson-and-dependencyof).
   - You can provide the label name where the component name is present, if the label isn't present `dependencyOf` will be skipped.
-- **`resourceType`** _(optional)_:
-  - Default: `CloudSQL`. 
-  - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
+- **`cloudsql`** _(optional)_:
+    - **`resourceType`** _(optional)_:
+      - Default: `CloudSQL`.
+      - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
 - **`schedule`** _(optional)_:
     - **`frequency`**:
       How often you want the task to run. The system does its best to avoid overlapping invocations.
