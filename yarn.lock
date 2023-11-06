@@ -6023,10 +6023,10 @@
   dependencies:
     "@react-hookz/deep-equal" "^1.0.4"
 
-"@remix-run/router@1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.9.0.tgz#9033238b41c4cbe1e961eccb3f79e2c588328cf6"
-  integrity sha512-bV63itrKBC0zdT27qYm6SDZHlkXwFL1xMBuhkn+X7l0+IIhNaH5wuuvZKp6eKhCD4KFhujhfhCT1YxXW6esUIA==
+"@remix-run/router@1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.11.0.tgz#e0e45ac3fff9d8a126916f166809825537e9f955"
+  integrity sha512-BHdhcWgeiudl91HvVa2wxqZjSHbheSgIiDvxrF1VjFzBzpTtuDPkOdOi3Iqvc08kXtFkLjhbS+ML9aM8mJS+wQ==
 
 "@rjsf/core-v5@npm:@rjsf/core@5.13.0":
   version "5.13.0"
@@ -6742,10 +6742,10 @@
   resolved "https://registry.yarnpkg.com/@spotify/eslint-config-typescript/-/eslint-config-typescript-14.1.6.tgz#dffaf2eeffd0c879605497c3d6ab275d02053db1"
   integrity sha512-7TbP8nywFUMu73nNTv0NzCmmgNFvGWlRMFZ7lCiFS+UOmfyaiYpJXUHLXXmNQ+qB8/PMrtaznvCIYmus9tqI9Q==
 
-"@spotify/prettier-config@^15.0.0":
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/@spotify/prettier-config/-/prettier-config-15.0.0.tgz#3dcc94ffa9c3fad68a1e8430ccba57edc0131399"
-  integrity sha512-ex7bdst1STr97y/MUTgVxadxpEZy48XVQDwZrESYO07EONSRstQYBaQWGVo80jmJ9NXC+r4ZjUqjT2Gw524Nqg==
+"@spotify/prettier-config@^14.0.0":
+  version "14.1.6"
+  resolved "https://registry.yarnpkg.com/@spotify/prettier-config/-/prettier-config-14.1.6.tgz#5fea574e469ff2b87d139be7a27a293119620ac8"
+  integrity sha512-VDojGCGVV9CfCjM7642wWbpbFlMSVPCCCiYUnXNVewD+/l8t62Ypscko60ZJnWQuHu5KL0/hOD1UY8nUpEV70w==
 
 "@sucrase/webpack-loader@^2.0.0":
   version "2.0.0"
@@ -7918,9 +7918,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-dom@*", "@types/react-dom@^17", "@types/react-dom@^18.0.0":
-  version "17.0.20"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.20.tgz#e0c8901469d732b36d8473b40b679ad899da1b53"
-  integrity sha512-4pzIjSxDueZZ90F52mU3aPoogkHIoSIDG+oQ+wQK7Cy2B9S+MvOqY0uEA/qawKz381qrEDkvpwyt8Bm31I8sbA==
+  version "17.0.22"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.22.tgz#34317e08be27b33fa9e7cdb56125b22538261bad"
+  integrity sha512-wHt4gkdSMb4jPp1vc30MLJxoWGsZs88URfmt3FRXoOEYrrqK3I8IuZLE/uFBb4UT6MRfI0wXFu4DS7LS0kUC7Q==
   dependencies:
     "@types/react" "^17"
 
@@ -19797,19 +19797,19 @@ react-refresh@^0.14.0:
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
 react-router-dom@^6.16.0:
-  version "6.16.0"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.16.0.tgz#86f24658da35eb66727e75ecbb1a029e33ee39d9"
-  integrity sha512-aTfBLv3mk/gaKLxgRDUPbPw+s4Y/O+ma3rEN1u8EgEpLpPe6gNjIsWt9rxushMHHMb7mSwxRGdGlGdvmFsyPIg==
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.18.0.tgz#0a50c167209d6e7bd2ed9de200a6579ea4fb1dca"
+  integrity sha512-Ubrue4+Ercc/BoDkFQfc6og5zRQ4A8YxSO3Knsne+eRbZ+IepAsK249XBH/XaFuOYOYr3L3r13CXTLvYt5JDjw==
   dependencies:
-    "@remix-run/router" "1.9.0"
-    react-router "6.16.0"
+    "@remix-run/router" "1.11.0"
+    react-router "6.18.0"
 
-react-router@6.16.0, react-router@^6.16.0:
-  version "6.16.0"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.16.0.tgz#abbf3d5bdc9c108c9b822a18be10ee004096fb81"
-  integrity sha512-VT4Mmc4jj5YyjpOi5jOf0I+TYzGpvzERy4ckNSvSh2RArv8LLoCxlsZ2D+tc7zgjxcY34oTz2hZaeX5RVprKqA==
+react-router@6.18.0, react-router@^6.16.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.18.0.tgz#32e2bedc318e095a48763b5ed7758e54034cd36a"
+  integrity sha512-vk2y7Dsy8wI02eRRaRmOs9g2o+aE72YCx5q9VasT1N9v+lrdB79tIqrjMfByHiY5+6aYkH2rUa5X839nwWGPDg==
   dependencies:
-    "@remix-run/router" "1.9.0"
+    "@remix-run/router" "1.11.0"
 
 react-side-effect@^2.1.0:
   version "2.1.2"
