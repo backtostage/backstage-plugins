@@ -6742,10 +6742,10 @@
   resolved "https://registry.yarnpkg.com/@spotify/eslint-config-typescript/-/eslint-config-typescript-14.1.6.tgz#dffaf2eeffd0c879605497c3d6ab275d02053db1"
   integrity sha512-7TbP8nywFUMu73nNTv0NzCmmgNFvGWlRMFZ7lCiFS+UOmfyaiYpJXUHLXXmNQ+qB8/PMrtaznvCIYmus9tqI9Q==
 
-"@spotify/prettier-config@^15.0.0":
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/@spotify/prettier-config/-/prettier-config-15.0.0.tgz#3dcc94ffa9c3fad68a1e8430ccba57edc0131399"
-  integrity sha512-ex7bdst1STr97y/MUTgVxadxpEZy48XVQDwZrESYO07EONSRstQYBaQWGVo80jmJ9NXC+r4ZjUqjT2Gw524Nqg==
+"@spotify/prettier-config@^14.0.0":
+  version "14.1.6"
+  resolved "https://registry.yarnpkg.com/@spotify/prettier-config/-/prettier-config-14.1.6.tgz#5fea574e469ff2b87d139be7a27a293119620ac8"
+  integrity sha512-VDojGCGVV9CfCjM7642wWbpbFlMSVPCCCiYUnXNVewD+/l8t62Ypscko60ZJnWQuHu5KL0/hOD1UY8nUpEV70w==
 
 "@sucrase/webpack-loader@^2.0.0":
   version "2.0.0"
@@ -7745,15 +7745,10 @@
   resolved "https://registry.yarnpkg.com/@types/lunr/-/lunr-2.3.4.tgz#728f445855818fb17776d10ef4678f278072eb03"
   integrity sha512-j4x4XJwZvorEUbA519VdQ5b9AOU9TSvfi8tvxMAfP8XzNLtFex7A8vFQwqOx3WACbV0KMXbACV3cZl4/gynQ7g==
 
-"@types/luxon@^3.0.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.3.0.tgz#a61043a62c0a72696c73a0a305c544c96501e006"
-  integrity sha512-uKRI5QORDnrGFYgcdAVnHvEIvEZ8noTpP/Bg+HeUzZghwinDlIS87DEenV5r1YoOF9G4x600YsUXLWZ19rmTmg==
-
-"@types/luxon@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.3.2.tgz#f6e3524c2486b949a4db445e85d93c8e9886dfe2"
-  integrity sha512-l5cpE57br4BIjK+9BSkFBOsWtwv6J9bJpC7gdXIzZyI0vuKvNTk0wZZrkQxMGsUAuGW9+WMNWF2IJMD7br2yeQ==
+"@types/luxon@^3.0.0", "@types/luxon@^3.3.2":
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.3.6.tgz#1c04d0c15b8d784a0a8c4d7dbfa1c5fd38a72a77"
+  integrity sha512-LblarKeI26YsMLxHDIQ0295wPSLjkl98eNwDcVhz3zbo1H+kfnkzR01H5Ai5LBzSeddX0ZJSpGwKEZihGb5diw==
 
 "@types/markdown-it@^12.2.3":
   version "12.2.3"
@@ -7918,9 +7913,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-dom@*", "@types/react-dom@^17", "@types/react-dom@^18.0.0":
-  version "17.0.20"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.20.tgz#e0c8901469d732b36d8473b40b679ad899da1b53"
-  integrity sha512-4pzIjSxDueZZ90F52mU3aPoogkHIoSIDG+oQ+wQK7Cy2B9S+MvOqY0uEA/qawKz381qrEDkvpwyt8Bm31I8sbA==
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.25.tgz#e0e5b3571e1069625b3a3da2b279379aa33a0cb5"
+  integrity sha512-urx7A7UxkZQmThYA4So0NelOVjx3V4rNFVJwp0WZlbIK5eM4rNJDiN3R/E9ix0MBh6kAEojk/9YL+Te6D9zHNA==
   dependencies:
     "@types/react" "^17"
 
