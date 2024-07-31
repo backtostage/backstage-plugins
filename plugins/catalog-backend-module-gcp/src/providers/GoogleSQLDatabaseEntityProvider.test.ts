@@ -36,24 +36,32 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
 
 
     it('no provider config', () => {
-        const schedule = new PersistingTaskRunner();
+        const scheduler =  {
+            createScheduledTaskRunner: jest.fn(),
+          } as any; 
         const config = new ConfigReader({});
         const providers = GoogleSQLDatabaseEntityProvider.fromConfig({
             config,
             logger,
-            schedule,
+            scheduler,
         });
 
         expect(providers).toHaveLength(0);
     });
 
     it('single simple provider config', () => {
-        const schedule = new PersistingTaskRunner();
+        const scheduler =  {
+            createScheduledTaskRunner: jest.fn(),
+          } as any; 
         const config = new ConfigReader({
             catalog: {
                 providers: {
                     gcp: [{
                         project: 'project',
+                        schedule: {
+                            frequency: { minutes: 30 },
+                            timeout: { minutes: 3 },
+                        }
                     }],
                 },
             },
@@ -61,21 +69,35 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const providers = GoogleSQLDatabaseEntityProvider.fromConfig({
             config,
             logger,
-            schedule,
+            scheduler,
         });
 
         expect(providers).toHaveLength(1);
-        expect(providers[0].getProviderName()).toEqual('GoogleSQLDatabaseEntityProvider:project');
+        expect(providers[0].getProviderName()).toEqual('google-sql-database-entity-provider:project');
     });
 
     it('multiple provider configs', () => {
-        const schedule = new PersistingTaskRunner();
+        const scheduler =  {
+            createScheduledTaskRunner: jest.fn(),
+          } as any;          
         const config = new ConfigReader({
             catalog: {
                 providers: {
                     gcp: [
-                        { project: 'myProvider' },
-                        { project: 'anotherProvider' },
+                        {
+                            project: 'myProvider',
+                            schedule: {
+                                frequency: { minutes: 30 },
+                                timeout: { minutes: 3 },
+                            }
+                        },
+                        {
+                            project: 'anotherProvider',
+                            schedule: {
+                                frequency: { minutes: 30 },
+                                timeout: { minutes: 3 },
+                            }
+                        },
                     ],
                 },
             },
@@ -83,15 +105,15 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const providers = GoogleSQLDatabaseEntityProvider.fromConfig({
             config,
             logger,
-            schedule,
+            scheduler,
         });
 
         expect(providers).toHaveLength(2);
         expect(providers[0].getProviderName()).toEqual(
-            'GoogleSQLDatabaseEntityProvider:myProvider',
+            'google-sql-database-entity-provider:myProvider',
         );
         expect(providers[1].getProviderName()).toEqual(
-            'GoogleSQLDatabaseEntityProvider:anotherProvider',
+            'google-sql-database-entity-provider:anotherProvider',
         );
     });
 
@@ -101,11 +123,19 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                 providers: {
                     gcp: [{
                         project: 'myProvider',
+                        schedule: {
+                            frequency: { minutes: 30 },
+                            timeout: { minutes: 3 },
+                        }
                     }],
                 },
             },
         });
-        const schedule = new PersistingTaskRunner();
+        const schedule = new PersistingTaskRunner()
+        const scheduler =  {
+            createScheduledTaskRunner: jest.fn(_ => schedule),
+          } as any;
+        
         const entityProviderConnection: EntityProviderConnection = {
             applyMutation: jest.fn(),
             refresh: jest.fn(),
@@ -114,7 +144,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const provider = GoogleSQLDatabaseEntityProvider.fromConfig({
             config,
             logger,
-            schedule,
+            scheduler,
         })[0];
 
         const mockListSQLInstances = jest.spyOn(
@@ -148,7 +178,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         await provider.connect(entityProviderConnection);
 
         const taskDef = schedule.getTasks()[0];
-        expect(taskDef.id).toEqual('GoogleSQLDatabaseEntityProvider:myProvider:refresh');
+        expect(taskDef.id).toEqual('google-sql-database-entity-provider:myProvider:refresh');
         await (taskDef.fn as () => Promise<void>)();
 
         const expectedEntities = [
@@ -158,8 +188,8 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                     apiVersion: 'backstage.io/v1alpha1',
                     metadata: {
                         annotations: {
-                            [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:myProvider`,
-                            [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:myProvider`,
+                            [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:myProvider`,
+                            [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                         },
                         name: 'database-name',
                         title: "database-name",
@@ -172,7 +202,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                         type: 'CloudSQL'
                     }
                 },
-                locationKey: 'GoogleSQLDatabaseEntityProvider:myProvider',
+                locationKey: 'google-sql-database-entity-provider:myProvider',
             },
             {
                 entity: {
@@ -180,8 +210,8 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                     apiVersion: 'backstage.io/v1alpha1',
                     metadata: {
                         annotations: {
-                            [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:myProvider`,
-                            [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:myProvider`,
+                            [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:myProvider`,
+                            [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                         },
                         name: 'another-database-name',
                         title: "another-database-name",
@@ -194,7 +224,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                         type: 'CloudSQL'
                     }
                 },
-                locationKey: 'GoogleSQLDatabaseEntityProvider:myProvider',
+                locationKey: 'google-sql-database-entity-provider:myProvider',
             }
 
         ];

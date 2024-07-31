@@ -15,31 +15,16 @@ yarn add --cwd packages/backend @backtostage/plugin-catalog-backend-module-gcp
 ```
 
 ### Cloud SQL - GoogleSQLDatabaseEntityProvider
-And then add the entity provider to your catalog builder:
 
-```ts title="packages/backend/src/plugins/catalog.ts"
-import { GoogleSQLDatabaseEntityProvider } from '@backtostage/plugin-catalog-backend-module-gcp'
+To your new backend file, add:
 
-export default async function createPlugin(
-  env: PluginEnvironment,
-): Promise<Router> {
-  const builder = await CatalogBuilder.create(env);
-  builder.addEntityProvider(
-      GoogleSQLDatabaseEntityProvider.fromConfig({
-      config: env.config,
-      logger: env.logger,
-      // optional: alternatively, use scheduler with schedule defined in app-config.yaml
-      schedule: env.scheduler.createScheduledTaskRunner({
-        frequency: { minutes: 30 },
-        timeout: { minutes: 3 },
-      }),
-      // optional: alternatively, use schedule
-      scheduler: env.scheduler,
-    }),
-  );
+```ts title="packages/backend/src/index.ts"
+import { catalogModuleGoogleSQLDatabaseEntityProvider } from '@backtostage/plugin-catalog-backend-module-gcp';
 
-  // ..
-}
+
+backend.add(
+  catalogModuleGoogleSQLDatabaseEntityProvider,
+);
 ```
 
 ## Configuration
@@ -62,7 +47,7 @@ catalog:
         componentLabel: app # string
         cloudsql:
           resourceType: SQL  # string
-        schedule: # optional; same options as in TaskScheduleDefinition
+        schedule: same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
           # supports ISO duration, "human duration" as used in code
@@ -85,7 +70,7 @@ This provider supports multiple projects using different configurations.
     - **`resourceType`** _(optional)_:
       - Default: `CloudSQL`.
       - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
-- **`schedule`** _(optional)_:
+- **`schedule`** _(required)_:
     - **`frequency`**:
       How often you want the task to run. The system does its best to avoid overlapping invocations.
     - **`timeout`**:

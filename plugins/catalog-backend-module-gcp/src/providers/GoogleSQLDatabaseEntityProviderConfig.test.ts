@@ -17,7 +17,13 @@ describe('readProviderConfigs', () => {
             catalog: {
                 providers: {
                     gcp: [
-                        { project: 'my-project' },
+                        {
+                            project: 'my-project',
+                            schedule: {
+                                frequency: { minutes: 30 },
+                                timeout: { minutes: 3 },
+                            }
+                        },
                     ],
                 },
             },
@@ -30,6 +36,8 @@ describe('readProviderConfigs', () => {
         expect(providerConfigs[0].componentLabel).toEqual('component');
         expect(providerConfigs[0].resourceType).toEqual('CloudSQL');
         expect(providerConfigs[0].resourceTransformer).toBeDefined();
+        expect(providerConfigs[0].schedule).toBeDefined();
+
     });
 
     it('multiple provider configs', () => {
@@ -37,12 +45,18 @@ describe('readProviderConfigs', () => {
             catalog: {
                 providers: {
                     gcp: [
-                        { project: 'my-project' },
+                        {
+                            project: 'my-project',
+                            schedule: {
+                                frequency: { minutes: 10 },
+                                timeout: { minutes: 3 },
+                            }
+                        },
                         {
                             project: 'my-other-project',
                             ownerLabel: 'team',
                             componentLabel: 'app',
-                            cloudsql: { resourceType: 'SQL',},
+                            cloudsql: { resourceType: 'SQL', },
                             schedule: {
                                 frequency: { minutes: 30 },
                                 timeout: { minutes: 3 },
@@ -60,7 +74,11 @@ describe('readProviderConfigs', () => {
             ownerLabel: 'owner',
             componentLabel: 'component',
             resourceType: 'CloudSQL',
-            resourceTransformer: expect.any(Function)
+            resourceTransformer: expect.any(Function),
+            schedule: {
+                frequency: { minutes: 10 },
+                timeout: { minutes: 3 },
+            }
         });
 
         expect(providerConfigs[1]).toEqual({

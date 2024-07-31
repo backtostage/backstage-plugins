@@ -14,7 +14,7 @@ export type GoogleSQLDatabaseEntityProviderConfig = {
     componentLabel: string
     resourceType: string
     resourceTransformer: GoogleDatabaseResourceTransformer
-    schedule?: TaskScheduleDefinition;
+    schedule: TaskScheduleDefinition;
 }
 
 export function readProviderConfigs(options: {
@@ -39,10 +39,7 @@ export function readProviderConfig(
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
 
-    const schedule = config.has('schedule')
-        ? readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'))
-        : undefined;
-
+    const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
     return {
         project,

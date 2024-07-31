@@ -5,8 +5,8 @@ import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity} from "@
 export type GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance) => ResourceEntity
 export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance): ResourceEntity => {
     const annotations: { [name: string]: string } = {
-        [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:${providerConfig.project}`,
-        [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:${providerConfig.project}`,
+        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
+        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
     };
 
     const owner = database.settings?.userLabels?.[providerConfig.ownerLabel]

@@ -1,39 +1,35 @@
-import {EntityProvider, EntityProviderConnection,} from '@backstage/plugin-catalog-node';
-import {Logger} from "winston";
-import {Config} from "@backstage/config";
-import {GoogleSQLDatabaseEntityProviderConfig, readProviderConfigs} from "./GoogleSQLDatabaseEntityProviderConfig";
-import {GoogleDatabaseResourceTransformer} from "../transformers/defaultResourceTransformer";
-import {PluginTaskScheduler, TaskRunner} from '@backstage/backend-tasks';
+import { EntityProvider, EntityProviderConnection, } from '@backstage/plugin-catalog-node';
+import { Config } from "@backstage/config";
+import { GoogleSQLDatabaseEntityProviderConfig, readProviderConfigs } from "./GoogleSQLDatabaseEntityProviderConfig";
+import { GoogleDatabaseResourceTransformer } from "../transformers/defaultResourceTransformer";
+import { TaskRunner } from '@backstage/backend-tasks';
+import { LoggerService, SchedulerService } from '@backstage/backend-plugin-api';
 import * as uuid from "uuid";
-import {listSQLInstances} from "../lib/sqladmin";
+import { listSQLInstances } from "../lib/sqladmin";
 
 
 export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
-    private readonly logger: Logger;
+    private readonly logger: LoggerService;
     private readonly scheduleFn: () => Promise<void>;
     private connection?: EntityProviderConnection;
 
     static fromConfig(options: {
         config: Config,
         resourceTransformer?: GoogleDatabaseResourceTransformer,
-        logger: Logger,
-        schedule?: TaskRunner;
-        scheduler?: PluginTaskScheduler;
+        logger: LoggerService,
+        scheduler: SchedulerService;
     }) {
-        if (!options.schedule && !options.scheduler) {
-            throw new Error('Either schedule or scheduler must be provided.');
-        }
 
         return readProviderConfigs(options).map((providerConfig) => {
-            const taskRunner =
-                options.schedule ??
-                options.scheduler!.createScheduledTaskRunner(providerConfig.schedule!);
-
-            return new GoogleSQLDatabaseEntityProvider(providerConfig, taskRunner, options.logger)
+            return new GoogleSQLDatabaseEntityProvider(
+                providerConfig,
+                options.scheduler.createScheduledTaskRunner(providerConfig.schedule),
+                options.logger
+            )
         })
     }
 
-    constructor(private config: GoogleSQLDatabaseEntityProviderConfig, taskRunner: TaskRunner, logger: Logger) {
+    constructor(private config: GoogleSQLDatabaseEntityProviderConfig, taskRunner: TaskRunner, logger: LoggerService) {
         this.scheduleFn = this.createScheduleFn(taskRunner);
         this.logger = logger.child({
             target: this.getProviderName(),
@@ -47,10 +43,10 @@ export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
 
 
     getProviderName(): string {
-        return `GoogleSQLDatabaseEntityProvider:${this.config.project}`;
+        return `google-sql-database-entity-provider:${this.config.project}`;
     }
 
-    async refresh(logger: Logger) {
+    async refresh(logger: LoggerService) {
         if (!this.connection) {
             throw new Error('Not initialized');
         }
@@ -81,7 +77,7 @@ export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
                     try {
                         await this.refresh(logger);
                     } catch (error) {
-                        logger.error(`${this.getProviderName()} run failed`, error);
+                        logger.error(`${this.getProviderName()} run failed ${error}`);
                     }
                 },
             });
