@@ -14,7 +14,11 @@ describe('defaultDatabaseResourceTransformer', () => {
             componentLabel: 'component',
             ownerLabel: 'owner',
             resourceType: 'SQL',
-            resourceTransformer: defaultDatabaseResourceTransformer
+            resourceTransformer: defaultDatabaseResourceTransformer,
+            schedule: {
+                frequency: { minutes: 30 },
+                timeout: { minutes: 3 },
+            }
         }
 
         const database: sqladmin_v1beta4.Schema$DatabaseInstance = {
@@ -35,8 +39,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                     },
                     name: 'database-name',
                     title: "database-name",
@@ -57,7 +61,11 @@ describe('defaultDatabaseResourceTransformer', () => {
                 componentLabel: 'component',
                 ownerLabel: 'ownerNotPresent',
                 resourceType: 'SQL',
-                resourceTransformer: defaultDatabaseResourceTransformer
+                resourceTransformer: defaultDatabaseResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                }
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);
@@ -66,8 +74,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                     },
                     name: 'database-name',
                     title: "database-name",
@@ -88,7 +96,11 @@ describe('defaultDatabaseResourceTransformer', () => {
                 componentLabel: 'componentNotPresent',
                 ownerLabel: 'owner',
                 resourceType: 'SQL',
-                resourceTransformer: defaultDatabaseResourceTransformer
+                resourceTransformer: defaultDatabaseResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                }
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);
@@ -97,8 +109,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                     },
                     name: 'database-name',
                     title: "database-name",
@@ -121,8 +133,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `GoogleSQLDatabaseEntityProvider:${config.project}`,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                     },
                     name: 'database-name',
                     title: "database-name",

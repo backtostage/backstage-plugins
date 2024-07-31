@@ -1,5 +1,6 @@
 import { createBackend } from '@backstage/backend-defaults';
 import { authModuleGithubProvider } from './plugins/auth'
+import { catalogModuleGoogleSQLDatabaseEntityProvider } from '@backtostage/plugin-catalog-backend-module-gcp';
 
 const backend = createBackend();
 backend.add(import('@backstage/plugin-app-backend/alpha'));
@@ -18,12 +19,7 @@ backend.add(import('@backstage/plugin-catalog-backend/alpha'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
-// TODO need conversion
-// builder.addEntityProvider(GoogleSQLDatabaseEntityProvider.fromConfig({
-//   config: env.config,
-//   logger: env.logger,
-//   scheduler: env.scheduler
-// }))
+backend.add(catalogModuleGoogleSQLDatabaseEntityProvider)
 
 
 // permission plugin
