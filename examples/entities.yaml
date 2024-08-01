@@ -39,3 +39,23 @@ spec:
     message ExampleMessage {
       string example = 1;
     };
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  annotations:
+    backstage.io/managed-by-location: google-sql-database-entity-provider:my-project
+    backstage.io/managed-by-origin-location: google-sql-database-entity-provider:my-project
+    backtostage.app/google-project: my-project
+    backtostage.app/google-sql-database-version: POSTGRES_15
+    backtostage.app/google-sql-database-installed-version: POSTGRES_15_7
+  name: database-fake
+  title: database-fake
+  links:
+    - url: https://console.cloud.google.com/sql/instances/database-fake/overview?project=my-project
+      title: Database URL
+spec:
+  type: SQL
+  owner: angeliski
+  dependencyOf:
+    - component:example-website

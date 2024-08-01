@@ -1,6 +1,11 @@
-import {GoogleSQLDatabaseEntityProviderConfig} from "../providers/GoogleSQLDatabaseEntityProviderConfig";
-import {sqladmin_v1beta4} from "googleapis";
-import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity} from "@backstage/catalog-model";
+import { GoogleSQLDatabaseEntityProviderConfig } from "../providers/GoogleSQLDatabaseEntityProviderConfig";
+import { sqladmin_v1beta4 } from "googleapis";
+import { ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity } from "@backstage/catalog-model";
+
+export const ANNOTATION_DATABASE_VERSION = "backtostage.app/google-sql-database-version"
+export const ANNOTATION_DATABASE_INSTALLED_VERSION = "backtostage.app/google-sql-database-installed-version"
+export const ANNOTATION_GCP_PROJECT = "backtostage.app/google-project"
+
 
 export type GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance) => ResourceEntity
 export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance): ResourceEntity => {
@@ -8,6 +13,17 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
     };
+
+    if (database.project) annotations[ANNOTATION_GCP_PROJECT] = database.project
+    if (database.databaseInstalledVersion) annotations[ANNOTATION_DATABASE_INSTALLED_VERSION] = database.databaseInstalledVersion
+    if (database.databaseVersion) annotations[ANNOTATION_DATABASE_VERSION] = database.databaseVersion
+
+    const links = []
+
+    if (database.name && database.project) links.push({
+        url: `https://console.cloud.google.com/sql/instances/${database.name}/overview?project=${database.project}`,
+        title: "Database URL"
+    })
 
     const owner = database.settings?.userLabels?.[providerConfig.ownerLabel]
     const component = database.settings?.userLabels?.[providerConfig.componentLabel];
@@ -19,6 +35,7 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
             annotations,
             name: database.name!,
             title: database.name!,
+            links,
         },
         spec: {
             owner: owner || 'unknown',
