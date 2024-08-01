@@ -5525,7 +5525,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backtostage/plugin-catalog-backend-module-gcp@npm:^0.1.0, @backtostage/plugin-catalog-backend-module-gcp@workspace:plugins/catalog-backend-module-gcp":
+"@backtostage/plugin-catalog-backend-module-gcp@npm:^0.2.0, @backtostage/plugin-catalog-backend-module-gcp@workspace:plugins/catalog-backend-module-gcp":
   version: 0.0.0-use.local
   resolution: "@backtostage/plugin-catalog-backend-module-gcp@workspace:plugins/catalog-backend-module-gcp"
   dependencies:
@@ -11233,12 +11233,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@spotify/prettier-config@npm:^14.0.0":
-  version: 14.1.6
-  resolution: "@spotify/prettier-config@npm:14.1.6"
+"@spotify/prettier-config@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "@spotify/prettier-config@npm:15.0.0"
   peerDependencies:
     prettier: 2.x
-  checksum: 10c0/a0df8527f2b9c245748731f539c4fe68b30868a9863da05e5f15eb18e4a7621a6bb01fc916fffb56b8390d539fa2a9dff716485c7ea31aa31b59ac4dd84c0851
+  checksum: 10c0/d7033f9f3ab255b490084f72928d4df086f6a51bb6f88b0d3678a5a63e46fc58ad025a0a709f96d8ae91b82093d991d54ea6a48b7d3f2c7f3f747c1853b76532
   languageName: node
   linkType: hard
 
@@ -14981,7 +14981,7 @@ __metadata:
     "@backstage/plugin-search-backend-module-techdocs": "npm:^0.1.27"
     "@backstage/plugin-search-backend-node": "npm:^1.2.23"
     "@backstage/plugin-techdocs-backend": "npm:^1.10.5"
-    "@backtostage/plugin-catalog-backend-module-gcp": "npm:^0.1.0"
+    "@backtostage/plugin-catalog-backend-module-gcp": "npm:^0.2.0"
     "@types/dockerode": "npm:^3.3.20"
     "@types/express": "npm:^4.17.19"
     "@types/express-serve-static-core": "npm:^4.17.37"
@@ -30217,7 +30217,7 @@ __metadata:
     "@backstage/cli": "npm:^0.26.6"
     "@changesets/changelog-github": "npm:^0.4.8"
     "@changesets/cli": "npm:^2.26.2"
-    "@spotify/prettier-config": "npm:^14.0.0"
+    "@spotify/prettier-config": "npm:^15.0.0"
     concurrently: "npm:^8.2.1"
     lerna: "npm:^7.3.1"
     node-gyp: "npm:^9.4.0"
