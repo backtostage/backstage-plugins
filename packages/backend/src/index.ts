@@ -1,6 +1,9 @@
 import { createBackend } from '@backstage/backend-defaults';
 import { authModuleGithubProvider } from './plugins/auth'
-import { catalogModuleGoogleSQLDatabaseEntityProvider } from '@backtostage/plugin-catalog-backend-module-gcp';
+import {
+  catalogModuleGoogleSQLDatabaseEntityProvider,
+  catalogModuleGoogleRedisDatabaseEntityProvider
+} from '@backtostage/plugin-catalog-backend-module-gcp';
 
 const backend = createBackend();
 backend.add(import('@backstage/plugin-app-backend/alpha'));
@@ -20,6 +23,7 @@ backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
 backend.add(catalogModuleGoogleSQLDatabaseEntityProvider)
+backend.add(catalogModuleGoogleRedisDatabaseEntityProvider)
 
 
 // permission plugin

@@ -27,6 +27,19 @@ backend.add(
 );
 ```
 
+### Memorystore Redis - GoogleRedisDatabaseEntityProvider
+
+To your new backend file, add:
+
+```ts title="packages/backend/src/index.ts"
+import { catalogModuleGoogleRedisDatabaseEntityProvider } from '@backtostage/plugin-catalog-backend-module-gcp';
+
+
+backend.add(
+  catalogModuleGoogleRedisDatabaseEntityProvider,
+);
+```
+
 ## Configuration
 
 To use this provider, you'll need a [Google Service Account](https://cloud.google.com/iam/docs/service-account-overview).
@@ -47,7 +60,10 @@ catalog:
         componentLabel: app # string
         cloudsql:
           resourceType: SQL  # string
-        schedule: same options as in TaskScheduleDefinition
+        redis:
+          resourceType: Redis  # string
+          location: us-central1 # string
+        schedule: # same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
           frequency: { minutes: 30 }
           # supports ISO duration, "human duration" as used in code
@@ -70,6 +86,13 @@ This provider supports multiple projects using different configurations.
     - **`resourceType`** _(optional)_:
       - Default: `CloudSQL`.
       - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
+- **`redis`** _(optional)_:
+    - **`resourceType`** _(optional)_:
+      - Default: `Memorystore Redis`.
+      - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
+    - **`location`** _(optional)_:
+      - Default: `` Wildcard value to [Google API](https://cloud.google.com/memorystore/docs/redis/reference/rest/v1beta1/projects.locations.instances/list)
+      - You can narrow the location to list. When not provided instances from all locations will be listed
 - **`schedule`** _(required)_:
     - **`frequency`**:
       How often you want the task to run. The system does its best to avoid overlapping invocations.
