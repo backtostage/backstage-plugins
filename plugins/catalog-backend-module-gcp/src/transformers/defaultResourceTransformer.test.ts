@@ -23,6 +23,9 @@ describe('defaultDatabaseResourceTransformer', () => {
 
         const database: sqladmin_v1beta4.Schema$DatabaseInstance = {
             name: 'database-name',
+            databaseVersion: "POSTGRES_15",
+            databaseInstalledVersion: "POSTGRES_15_7",
+            project: config.project,
             settings: {
                 userLabels: {
                     [config.ownerLabel]: 'owner',
@@ -41,9 +44,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                     annotations: {
                         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        "backtostage.app/google-project": config.project,
+                        "backtostage.app/google-sql-database-version": "POSTGRES_15",
+                        "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
+                    links: [{
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        title: "Database URL"
+                    }]
                 },
                 spec: {
                     dependencyOf: [
@@ -76,9 +86,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                     annotations: {
                         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        "backtostage.app/google-project": config.project,
+                        "backtostage.app/google-sql-database-version": "POSTGRES_15",
+                        "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
+                    links: [{
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        title: "Database URL"
+                    }]
                 },
                 spec: {
                     dependencyOf: [
@@ -111,9 +128,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                     annotations: {
                         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        "backtostage.app/google-project": config.project,
+                        "backtostage.app/google-sql-database-version": "POSTGRES_15",
+                        "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
+                    links: [{
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        title: "Database URL"
+                    }]
                 },
                 spec: {
                     owner: 'owner',
@@ -135,9 +159,11 @@ describe('defaultDatabaseResourceTransformer', () => {
                     annotations: {
                         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        
                     },
                     name: 'database-name',
                     title: "database-name",
+                    links: [],
                 },
                 spec: {
                     owner: 'unknown',

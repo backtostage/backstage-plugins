@@ -193,6 +193,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                         },
                         name: 'database-name',
                         title: "database-name",
+                        links: [],
                     },
                     spec: {
                         dependencyOf: [
@@ -215,6 +216,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                         },
                         name: 'another-database-name',
                         title: "another-database-name",
+                        links: [],
                     },
                     spec: {
                         dependencyOf: [
