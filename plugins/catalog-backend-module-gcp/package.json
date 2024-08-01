@@ -9,15 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/backtostage/backstage-plugins.git"
+    "url": "https://github.com/backtostage/backstage-plugins.git",
+    "directory": "plugins/catalog-backend-module-gcp"
   },
   "publishConfig": {
-    "access": "public",
-    "main": "dist/index.cjs.js",
-    "types": "dist/index.d.ts"
+    "access": "public"
   },
   "backstage": {
-    "role": "backend-plugin-module"
+    "role": "backend-plugin-module",
+    "pluginId": "catalog",
+    "pluginPackage": "@backstage/plugin-catalog-backend"
   },
   "scripts": {
     "build": "backstage-cli package build",
