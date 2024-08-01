@@ -4,11 +4,6 @@ import { TaskScheduleDefinitionConfig } from '@backstage/backend-tasks';
 export interface Config {
   catalog?: {
     providers?: {
-      /**
-       * GithubEntityProvider configuration
-       *
-       * Uses "default" as default id for the single config variant.
-       */
       gcp?:
       Array<{
         project: string;
@@ -29,10 +24,23 @@ export interface Config {
            * Default: `CloudSQL`.
            */
           resourceType?: string;
+        },
+        
+        redis?: {
+          /**
+           * (Optional) The provider will set the Resource type based in this information.
+           * Default: `Memorystore Redis`.
+           */
+          resourceType?: string;
+          /**
+           * (Optional) The provider will use this location to retrieve instances.
+           * Default: `Wildcard for all locations`.
+           */
+          location?: string;
         }
 
         /**
-         * (Optional) TaskScheduleDefinition for the refresh.
+         * (Required) TaskScheduleDefinition for the refresh.
          */
         schedule?: TaskScheduleDefinitionConfig;
       }

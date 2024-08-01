@@ -1,1 +1,2 @@
 export { catalogModuleGoogleSQLDatabaseEntityProvider } from './catalogModuleGoogleSQLDatabaseEntityProvider';
+export { catalogModuleGoogleRedisDatabaseEntityProvider } from './catalogModuleGoogleRedisDatabaseEntityProvider';

@@ -1,11 +1,15 @@
 import { GoogleSQLDatabaseEntityProviderConfig } from "../providers/GoogleSQLDatabaseEntityProviderConfig";
-import { sqladmin_v1beta4 } from "googleapis";
+import  {GoogleRedisDatabaseEntityProviderConfig} from "../providers/GoogleRedisDatabaseEntityProviderConfig";
+import { sqladmin_v1beta4, redis_v1beta1 } from "googleapis";
 import { ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity } from "@backstage/catalog-model";
 
 export const ANNOTATION_DATABASE_VERSION = "backtostage.app/google-sql-database-version"
 export const ANNOTATION_DATABASE_INSTALLED_VERSION = "backtostage.app/google-sql-database-installed-version"
 export const ANNOTATION_GCP_PROJECT = "backtostage.app/google-project"
 
+export const ANNOTATION_REDIS_VERSION = "backtostage.app/google-redis-database-version"
+
+const REDIS_NAME_PARSE =/projects\/(?<project>.*)\/locations\/(?<location>.*)\/instances\/(?<name>.*)/
 
 export type GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance) => ResourceEntity
 export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance): ResourceEntity => {
@@ -35,6 +39,57 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
             annotations,
             name: database.name!,
             title: database.name!,
+            links,
+        },
+        spec: {
+            owner: owner || 'unknown',
+            type: providerConfig.resourceType,
+        }
+    };
+
+    if (component) {
+        resource.spec.dependencyOf = [
+            `component:${component}`
+        ]
+    }
+
+
+    return resource
+}
+
+export type GoogleRedisResourceTransformer = (providerConfig: GoogleRedisDatabaseEntityProviderConfig, redis: redis_v1beta1.Schema$Instance) => ResourceEntity
+export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (providerConfig: GoogleRedisDatabaseEntityProviderConfig, redis: redis_v1beta1.Schema$Instance): ResourceEntity => {
+    const annotations: { [name: string]: string } = {
+        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${providerConfig.project}`,
+        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${providerConfig.project}`,
+    };
+    
+    const redisNameGroup = REDIS_NAME_PARSE.exec(redis.name?? "")?.groups
+    if(!redisNameGroup) {
+        // we assume a strong error if something goes wrong in this step
+        throw new Error("Parsing Redis instance resulted in error")
+    }
+    
+
+    annotations[ANNOTATION_GCP_PROJECT] = redisNameGroup.project
+    if (redis.redisVersion) annotations[ANNOTATION_REDIS_VERSION] = redis.redisVersion
+    
+    const links = []
+
+    if (redisNameGroup.name && redisNameGroup.project) links.push({
+        url: `https://console.cloud.google.com/memorystore/redis/locations/${redisNameGroup.location}/instances/${redisNameGroup.name}/details/overview?project=${redisNameGroup.project}`,
+        title: "Redis URL"
+    })
+
+    const owner = redis.labels?.[providerConfig.ownerLabel]
+    const component = redis.labels?.[providerConfig.componentLabel];
+
+    const resource: ResourceEntity = {
+        kind: 'Resource',
+        apiVersion: 'backstage.io/v1alpha1',
+        metadata: {
+            annotations,
+            name: redisNameGroup.name,
             links,
         },
         spec: {

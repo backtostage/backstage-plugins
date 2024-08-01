@@ -113,3 +113,15 @@ catalog:
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
     #     - allow: [User, Group]
+  providers:
+    gcp:
+      - project: my-gcp-project-id
+        ownerLabel: team
+        componentLabel: app
+        cloudsql:
+          resourceType: SQL
+        redis:
+          location: us-central1
+        schedule:
+          frequency: { minutes: 30 }
+          timeout: { minutes: 3 }
