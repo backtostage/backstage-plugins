@@ -1,5 +1,13 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.1
+
+### Patch Changes
+
+- [#141](https://github.com/backtostage/backstage-plugins/pull/141) [`9af82d5984043bd291f0a432909381e56585a70b`](https://github.com/backtostage/backstage-plugins/commit/9af82d5984043bd291f0a432909381e56585a70b) Thanks [@angeliski](https://github.com/angeliski)! - This change adds a new entity provider to import redis memorystore from GCP
+
+  We are using a separete module export to allow more flexibility in each resource you want to import in your backstage instance
+
 ## 0.2.0
 
 ### Minor Changes
