@@ -8966,14 +8966,14 @@ __metadata:
   linkType: hard
 
 "@octokit/webhooks@npm:^10.0.0":
-  version: 10.9.1
-  resolution: "@octokit/webhooks@npm:10.9.1"
+  version: 10.9.2
+  resolution: "@octokit/webhooks@npm:10.9.2"
   dependencies:
     "@octokit/request-error": "npm:^3.0.0"
     "@octokit/webhooks-methods": "npm:^3.0.0"
     "@octokit/webhooks-types": "npm:6.11.0"
     aggregate-error: "npm:^3.1.0"
-  checksum: 10c0/f6c23d92bfb2e4bf3edf3eada3cc74610ef3160f4b4e6addcfc3bfbfe72ea28ec58991c1812d9e02190a4fe6d9248b9a577c286221cd535c2bf5d738aae3844c
+  checksum: 10c0/9482ec72630d73f1746ef970d4e39758f0e028d0d67f70672ae0d92d9335387ee031761b2c246e667bdaf27c2318a229a3053417a3ad8b3034e614ff3d455d01
   languageName: node
   linkType: hard
 
