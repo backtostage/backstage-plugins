@@ -6,7 +6,12 @@ export interface Config {
     providers?: {
       gcp?:
       Array<{
-        project: string;
+        project?: string;
+        organization?: {
+          query?: string;
+          resourceType?: string;
+          disable?: boolean;
+        }
         /**
          * (Optional) The provider will look for user defined labels to find the Resource Owner.
          * Default: `owner`.
@@ -24,6 +29,7 @@ export interface Config {
            * Default: `CloudSQL`.
            */
           resourceType?: string;
+          disable?: boolean;
         },
         
         redis?: {
@@ -37,6 +43,7 @@ export interface Config {
            * Default: `Wildcard for all locations`.
            */
           location?: string;
+          disable?: boolean;
         }
 
         /**

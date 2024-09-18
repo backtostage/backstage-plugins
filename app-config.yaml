@@ -115,13 +115,17 @@ catalog:
     #     - allow: [User, Group]
   providers:
     gcp:
-      - project: my-gcp-project-id
+      - organization: 
+          query: "parent:organizations/XPTO"
+          resourceType: Project
         ownerLabel: team
         componentLabel: app
         cloudsql:
           resourceType: SQL
+          disable: true
         redis:
           location: us-central1
+          disable: true
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 3 }
