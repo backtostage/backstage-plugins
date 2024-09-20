@@ -1,5 +1,6 @@
 export { GoogleSQLDatabaseEntityProvider } from "./providers/GoogleSQLDatabaseEntityProvider";
 export {
     catalogModuleGoogleSQLDatabaseEntityProvider,
-    catalogModuleGoogleRedisDatabaseEntityProvider
+    catalogModuleGoogleRedisDatabaseEntityProvider,
+    catalogModuleGoogleOrganizationProjectEntityProvider
 } from './module'

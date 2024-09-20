@@ -15,6 +15,7 @@ export type GoogleSQLDatabaseEntityProviderConfig = {
     resourceType: string
     resourceTransformer: GoogleDatabaseResourceTransformer
     schedule: TaskScheduleDefinition;
+    disabled: boolean;
 }
 
 export function readProviderConfigs(options: {
@@ -27,7 +28,9 @@ export function readProviderConfigs(options: {
         return [];
     }
 
-    return providersConfig.map(config => readProviderConfig(config, options.resourceTransformer));
+    return providersConfig
+    .map(config => readProviderConfig(config, options.resourceTransformer))
+    .filter(provider => !provider.disabled);
 }
 
 export function readProviderConfig(
@@ -38,6 +41,7 @@ export function readProviderConfig(
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
+    const disabled = config.getOptionalBoolean('cloudsql.disabled') || false;
 
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
@@ -47,6 +51,7 @@ export function readProviderConfig(
         componentLabel,
         resourceType,
         resourceTransformer: resourceTransformer ?? defaultDatabaseResourceTransformer,
-        schedule
+        schedule,
+        disabled
     }
 }

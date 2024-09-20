@@ -18,7 +18,8 @@ describe('defaultDatabaseResourceTransformer', () => {
             schedule: {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
-            }
+            },
+            disabled: true
         }
 
         const database: sqladmin_v1beta4.Schema$DatabaseInstance = {
@@ -75,7 +76,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 schedule: {
                     frequency: { minutes: 30 },
                     timeout: { minutes: 3 },
-                }
+                },
+                disabled: true
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);
@@ -117,7 +119,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 schedule: {
                     frequency: { minutes: 30 },
                     timeout: { minutes: 3 },
-                }
+                },
+                disabled: true
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);

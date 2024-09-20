@@ -11,7 +11,39 @@ describe('readProviderConfigs', () => {
 
         expect(providerConfigs).toHaveLength(0);
     });
-
+    
+    it('remove disabled provider config', () => {
+        const config = new ConfigReader({
+            catalog: {
+                providers: {
+                    gcp: [
+                        {
+                            project: 'my-project',
+                            redis: { disabled: true },
+                            schedule: {
+                                frequency: { minutes: 10 },
+                                timeout: { minutes: 3 },
+                            }
+                        },
+                        {
+                            project: 'my-other-project',
+                            ownerLabel: 'team',
+                            componentLabel: 'app',
+                            redis: { disabled: true },
+                            schedule: {
+                                frequency: { minutes: 30 },
+                                timeout: { minutes: 3 },
+                            },
+                        },
+                    ],
+                }
+            },
+        });
+        const providerConfigs = readProviderConfigs({ config });
+    
+        expect(providerConfigs).toHaveLength(0);
+    });
+    
     it('single simple provider config', () => {
         const config = new ConfigReader({
             catalog: {
@@ -78,7 +110,8 @@ describe('readProviderConfigs', () => {
             schedule: {
                 frequency: { minutes: 10 },
                 timeout: { minutes: 3 },
-            }
+            },
+            disabled: false
         });
 
         expect(providerConfigs[1]).toEqual({
@@ -92,6 +125,7 @@ describe('readProviderConfigs', () => {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
             },
+            disabled: false
         });
 
     });
