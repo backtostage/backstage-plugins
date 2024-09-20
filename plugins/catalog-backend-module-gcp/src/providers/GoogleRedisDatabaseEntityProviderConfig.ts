@@ -1,7 +1,6 @@
 import { Config } from "@backstage/config";
 import {
     defaultRedisResourceTransformer,
-    GoogleDatabaseResourceTransformer,
     GoogleRedisResourceTransformer
 } from "../transformers/defaultResourceTransformer";
 import {
@@ -17,11 +16,12 @@ export type GoogleRedisDatabaseEntityProviderConfig = {
     resourceType: string
     resourceTransformer: GoogleRedisResourceTransformer
     schedule: TaskScheduleDefinition;
+    disabled: boolean;
 }
 
 export function readProviderConfigs(options: {
     config: Config,
-    resourceTransformer?: GoogleDatabaseResourceTransformer
+    resourceTransformer?: GoogleRedisResourceTransformer
 }): GoogleRedisDatabaseEntityProviderConfig[] {
 
     const providersConfig = options.config.getOptionalConfigArray('catalog.providers.gcp');
@@ -29,12 +29,14 @@ export function readProviderConfigs(options: {
         return [];
     }
 
-    return providersConfig.map(config => readProviderConfig(config, options.resourceTransformer));
+    return providersConfig
+    .map(config => readProviderConfig(config, options.resourceTransformer))
+    .filter(provider => !provider.disabled);
 }
 
 export function readProviderConfig(
     config: Config,
-    resourceTransformer?: GoogleDatabaseResourceTransformer
+    resourceTransformer?: GoogleRedisResourceTransformer
 ): GoogleRedisDatabaseEntityProviderConfig {
     const project = config.getString("project");
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
@@ -42,6 +44,7 @@ export function readProviderConfig(
     const resourceType = config.getOptionalString('redis.resourceType') ?? 'Memorystore Redis'
     const location = config.getOptionalString('redis.location')
 
+    const disabled = config.getOptionalBoolean('redis.disabled') || false;
 
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
@@ -52,6 +55,7 @@ export function readProviderConfig(
         resourceType,
         location,
         resourceTransformer: resourceTransformer ?? defaultRedisResourceTransformer,
-        schedule
+        schedule,
+        disabled
     }
 }
