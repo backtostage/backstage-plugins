@@ -10,7 +10,7 @@ export interface Config {
         organization?: {
           query?: string;
           resourceType?: string;
-          disable?: boolean;
+          disabled?: boolean;
         }
         /**
          * (Optional) The provider will look for user defined labels to find the Resource Owner.
@@ -29,7 +29,7 @@ export interface Config {
            * Default: `CloudSQL`.
            */
           resourceType?: string;
-          disable?: boolean;
+          disabled?: boolean;
         },
         
         redis?: {
@@ -43,7 +43,7 @@ export interface Config {
            * Default: `Wildcard for all locations`.
            */
           location?: string;
-          disable?: boolean;
+          disabled?: boolean;
         }
 
         /**

@@ -122,10 +122,10 @@ catalog:
         componentLabel: app
         cloudsql:
           resourceType: SQL
-          disable: true
+          disabled: true
         redis:
           location: us-central1
-          disable: true
+          disabled: true
         schedule:
           frequency: { minutes: 30 }
           timeout: { minutes: 3 }
