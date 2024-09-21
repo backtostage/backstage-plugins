@@ -17,8 +17,8 @@ const PROJECT_NAME_PARSE =/projects(?<project>.*)\/(?<name>.*)/
 export type GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance) => ResourceEntity
 export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransformer = (providerConfig: GoogleSQLDatabaseEntityProviderConfig, database: sqladmin_v1beta4.Schema$DatabaseInstance): ResourceEntity => {
     const annotations: { [name: string]: string } = {
-        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
-        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${providerConfig.project}`,
+        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${providerConfig.id}`,
+        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${providerConfig.id}`,
     };
 
     if (database.project) annotations[ANNOTATION_GCP_PROJECT] = database.project
@@ -63,8 +63,8 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
 export type GoogleRedisResourceTransformer = (providerConfig: GoogleRedisDatabaseEntityProviderConfig, redis: redis_v1beta1.Schema$Instance) => ResourceEntity
 export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (providerConfig: GoogleRedisDatabaseEntityProviderConfig, redis: redis_v1beta1.Schema$Instance): ResourceEntity => {
     const annotations: { [name: string]: string } = {
-        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${providerConfig.project}`,
-        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${providerConfig.project}`,
+        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${providerConfig.id}`,
+        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${providerConfig.id}`,
     };
     
     const redisNameGroup = REDIS_NAME_PARSE.exec(redis.name?? "")?.groups

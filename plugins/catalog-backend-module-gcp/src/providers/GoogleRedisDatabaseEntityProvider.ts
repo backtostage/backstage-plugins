@@ -1,7 +1,7 @@
 import { EntityProvider, EntityProviderConnection, } from '@backstage/plugin-catalog-node';
 import { Config } from "@backstage/config";
 import { GoogleRedisDatabaseEntityProviderConfig, readProviderConfigs } from "./GoogleRedisDatabaseEntityProviderConfig";
-import { GoogleDatabaseResourceTransformer } from "../transformers/defaultResourceTransformer";
+import { GoogleRedisResourceTransformer } from "../transformers/defaultResourceTransformer";
 import { TaskRunner } from '@backstage/backend-tasks';
 import { LoggerService, SchedulerService } from '@backstage/backend-plugin-api';
 import * as uuid from "uuid";
@@ -16,7 +16,7 @@ export class GoogleRedisDatabaseEntityProvider implements EntityProvider {
 
     static fromConfig(options: {
         config: Config,
-        resourceTransformer?: GoogleDatabaseResourceTransformer,
+        resourceTransformer?: GoogleRedisResourceTransformer,
         logger: LoggerService,
         scheduler: SchedulerService;
     }) {
@@ -44,29 +44,39 @@ export class GoogleRedisDatabaseEntityProvider implements EntityProvider {
 
 
     getProviderName(): string {
-        return `google-redis-database-entity-provider:${this.config.project}-${this.config.location?? 'wildcard'}`;
+        return `google-redis-database-entity-provider:${this.config.id}-${this.config.location?? 'wildcard'}`;
     }
 
     async refresh(logger: LoggerService) {
         if (!this.connection) {
             throw new Error('Not initialized');
         }
-        logger.info(`Reading GCP Redis Instances for project ${this.config.project} in location ${this.config.location}`);
-        const databases = await listRedisInstances(this.config.project, this.config.location)
-        const resources: ResourceEntityV1alpha1[] = []
-        for (let index = 0; index < databases.length; index++) {
-            const db = databases[index];
-            try {
-                const result = this.config.resourceTransformer(this.config, db)
-                if(result) resources.push(result)
-            } catch (error) {
-                logger.error(`Error to transform ${db} - ${error}`)
+        logger.info(`Reading GCP Redis Instances`)
+
+        const projects = await this.config.projectLocator.getProjects();
+        const allResources: ResourceEntityV1alpha1[] = [];
+
+        logger.info(`Found ${projects.length} projects`)
+
+        for (const project of projects) {
+            logger.info(`Reading GCP Redis Instances for project ${project} in location ${this.config.location}`);
+            const databases = await listRedisInstances(project, this.config.location)
+            const resources: ResourceEntityV1alpha1[] = []
+            for (let index = 0; index < databases.length; index++) {
+                const db = databases[index];
+                try {
+                    const result = this.config.resourceTransformer(this.config, db)
+                    if(result) resources.push(result)
+                } catch (error) {
+                    logger.error(`Error to transform ${db} - ${error}`)
+                }
             }
+            
         }
 
         await this.connection.applyMutation({
             type: 'full',
-            entities: resources.map(entity => ({
+            entities: allResources.map(entity => ({
                 entity,
                 locationKey: this.getProviderName(),
             })),

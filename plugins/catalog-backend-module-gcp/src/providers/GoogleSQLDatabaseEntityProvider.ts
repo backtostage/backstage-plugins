@@ -6,6 +6,7 @@ import { TaskRunner } from '@backstage/backend-tasks';
 import { LoggerService, SchedulerService } from '@backstage/backend-plugin-api';
 import * as uuid from "uuid";
 import { listSQLInstances } from "../lib/sqladmin";
+import { ResourceEntityV1alpha1 } from '@backstage/catalog-model';
 
 
 export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
@@ -43,20 +44,30 @@ export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
 
 
     getProviderName(): string {
-        return `google-sql-database-entity-provider:${this.config.project}`;
+        return `google-sql-database-entity-provider:${this.config.id}`;
     }
 
     async refresh(logger: LoggerService) {
         if (!this.connection) {
             throw new Error('Not initialized');
         }
-        logger.info(`Reading GCP SQL Instances for project ${this.config.project}`);
-        const databases = await listSQLInstances(this.config.project)
-        const resources = databases.map(db => this.config.resourceTransformer(this.config, db));
+        logger.info(`Reading GCP SQL Instances`);
+
+
+        const projects = await this.config.projectLocator.getProjects();
+        const allResources: ResourceEntityV1alpha1[] = [];
+        logger.info(`Found ${projects.length} projects`);
+        
+        for (const project of projects) {
+            logger.info(`Reading GCP SQL Instances for project ${project}`);
+            const databases = await listSQLInstances(project)
+            const resources = databases.map(db => this.config.resourceTransformer(this.config, db));
+            allResources.push(...resources);
+        }
 
         await this.connection.applyMutation({
             type: 'full',
-            entities: resources.map(entity => ({
+            entities: allResources.map(entity => ({
                 entity,
                 locationKey: this.getProviderName(),
             })),
