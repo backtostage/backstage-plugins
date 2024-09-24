@@ -1,5 +1,23 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.1
+
+### Patch Changes
+
+- [#141](https://github.com/backtostage/backstage-plugins/pull/141) [`9af82d5984043bd291f0a432909381e56585a70b`](https://github.com/backtostage/backstage-plugins/commit/9af82d5984043bd291f0a432909381e56585a70b) Thanks [@angeliski](https://github.com/angeliski)! - This change adds a new entity provider to import redis memorystore from GCP
+
+  We are using a separete module export to allow more flexibility in each resource you want to import in your backstage instance
+
+- [#177](https://github.com/backtostage/backstage-plugins/pull/177) [`cf9442aa03fba28cce6286ef146d3745c64f6774`](https://github.com/backtostage/backstage-plugins/commit/cf9442aa03fba28cce6286ef146d3745c64f6774) Thanks [@angeliski](https://github.com/angeliski)! - Add locator to enable organization load
+
+  You can now use [Google API](https://cloud.google.com/resource-manager/reference/rest/v3/projects/search#query-parameters) to load projects from your organization and that will be used to load GCP Resources.
+
+- [#172](https://github.com/backtostage/backstage-plugins/pull/172) [`041d377bb9b04a1d17f3f81dd1b4dd81321c4c6f`](https://github.com/backtostage/backstage-plugins/commit/041d377bb9b04a1d17f3f81dd1b4dd81321c4c6f) Thanks [@angeliski](https://github.com/angeliski)! - This change adds a new entity provider to import Projects from GCP
+
+  We are using a separete module export to allow more flexibility in each resource you want to import in your backstage instance
+
+- [#172](https://github.com/backtostage/backstage-plugins/pull/172) [`041d377bb9b04a1d17f3f81dd1b4dd81321c4c6f`](https://github.com/backtostage/backstage-plugins/commit/041d377bb9b04a1d17f3f81dd1b4dd81321c4c6f) Thanks [@angeliski](https://github.com/angeliski)! - Add disabled option to entity providers. The default behavior is to try to import all providers from each configuration, now you can disable when needed.
+
 ## 0.2.0
 
 ### Minor Changes
