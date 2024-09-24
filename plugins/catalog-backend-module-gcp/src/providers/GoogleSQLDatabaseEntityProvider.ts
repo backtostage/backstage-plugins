@@ -59,10 +59,14 @@ export class GoogleSQLDatabaseEntityProvider implements EntityProvider {
         logger.info(`Found ${projects.length} projects`);
         
         for (const project of projects) {
-            logger.info(`Reading GCP SQL Instances for project ${project}`);
-            const databases = await listSQLInstances(project)
-            const resources = databases.map(db => this.config.resourceTransformer(this.config, db));
-            allResources.push(...resources);
+            try {
+                logger.info(`Reading GCP SQL Instances for project ${project}`);
+                const databases = await listSQLInstances(project)
+                const resources = databases.map(db => this.config.resourceTransformer(this.config, db));
+                allResources.push(...resources);
+            } catch (error) {
+                logger.error(`Error reading GCP SQL Instances for project ${project} - ${error}`);
+            }
         }
 
         await this.connection.applyMutation({

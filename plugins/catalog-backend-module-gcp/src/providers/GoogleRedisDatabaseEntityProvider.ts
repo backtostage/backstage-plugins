@@ -60,18 +60,22 @@ export class GoogleRedisDatabaseEntityProvider implements EntityProvider {
 
         for (const project of projects) {
             logger.info(`Reading GCP Redis Instances for project ${project} in location ${this.config.location}`);
-            const databases = await listRedisInstances(project, this.config.location)
-            const resources: ResourceEntityV1alpha1[] = []
-            for (let index = 0; index < databases.length; index++) {
-                const db = databases[index];
-                try {
-                    const result = this.config.resourceTransformer(this.config, db)
-                    if(result) resources.push(result)
-                } catch (error) {
-                    logger.error(`Error to transform ${db} - ${error}`)
+            try {
+                const databases = await listRedisInstances(project, this.config.location)
+                const resources: ResourceEntityV1alpha1[] = []
+                for (let index = 0; index < databases.length; index++) {
+                    const db = databases[index];
+                    try {
+                        const result = this.config.resourceTransformer(this.config, db)
+                        if(result) resources.push(result)
+                    } catch (error) {
+                        logger.error(`Error to transform ${db} - ${error}`)
+                    }
                 }
+                allResources.push(...resources); 
+            } catch (error) {
+                logger.error(`Error to list databases for project ${project} - ${error}`)
             }
-            allResources.push(...resources); 
         }
 
         await this.connection.applyMutation({
