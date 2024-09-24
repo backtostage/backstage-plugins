@@ -98,6 +98,7 @@ This provider supports multiple projects using different configurations.
 
 - **`project`** _(required when not using organization import)_:
   Project ID of the project for which to list Cloud SQL instances.
+  You can omit that field if you want the provider to load all projects in your organization to load other resources.
 - **`organization`** _(optional)_:
     - **`query`** _(optional)_:
       - Default: `` Query param to [Google API](https://cloud.google.com/resource-manager/reference/rest/v3/projects/search#query-parameters)

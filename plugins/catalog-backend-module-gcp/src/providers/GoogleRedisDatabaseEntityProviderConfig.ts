@@ -7,9 +7,11 @@ import {
     readTaskScheduleDefinitionFromConfig,
     TaskScheduleDefinition,
 } from '@backstage/backend-tasks';
+import { getProjectLocator, GoogleProjectLocator } from "../project-locator";
 
 export type GoogleRedisDatabaseEntityProviderConfig = {
-    project: string
+    id: string
+    projectLocator: GoogleProjectLocator
     location?: string
     ownerLabel: string
     componentLabel: string
@@ -38,7 +40,8 @@ export function readProviderConfig(
     config: Config,
     resourceTransformer?: GoogleRedisResourceTransformer
 ): GoogleRedisDatabaseEntityProviderConfig {
-    const project = config.getString("project");
+    // when project is not defined, default to 'organization'
+    const id = config.getOptionalString("project") ?? 'organization';
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('redis.resourceType') ?? 'Memorystore Redis'
@@ -49,11 +52,12 @@ export function readProviderConfig(
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
     return {
-        project,
+        id,
         ownerLabel,
         componentLabel,
         resourceType,
         location,
+        projectLocator: getProjectLocator(config),
         resourceTransformer: resourceTransformer ?? defaultRedisResourceTransformer,
         schedule,
         disabled

@@ -63,7 +63,7 @@ describe('readProviderConfigs', () => {
         const providerConfigs = readProviderConfigs({ config });
 
         expect(providerConfigs).toHaveLength(1);
-        expect(providerConfigs[0].project).toEqual('my-project');
+        expect(providerConfigs[0].id).toEqual('my-project');
         expect(providerConfigs[0].ownerLabel).toEqual('owner');
         expect(providerConfigs[0].componentLabel).toEqual('component');
         expect(providerConfigs[0].resourceType).toEqual('Memorystore Redis');
@@ -102,7 +102,10 @@ describe('readProviderConfigs', () => {
 
         expect(providerConfigs).toHaveLength(2);
         expect(providerConfigs[0]).toEqual({
-            project: 'my-project',
+            id: 'my-project',
+            projectLocator: {
+                project: 'my-project',
+            },
             ownerLabel: 'owner',
             componentLabel: 'component',
             resourceType: 'Memorystore Redis',
@@ -115,7 +118,10 @@ describe('readProviderConfigs', () => {
         });
 
         expect(providerConfigs[1]).toEqual({
-            project: 'my-other-project',
+            id: 'my-other-project',
+            projectLocator: {
+                project: 'my-other-project',
+            },
             ownerLabel: 'team',
             componentLabel: 'app',
             resourceType: 'database',

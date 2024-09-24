@@ -2,6 +2,7 @@ import {defaultDatabaseResourceTransformer} from "./defaultResourceTransformer";
 import {GoogleSQLDatabaseEntityProviderConfig} from "../providers/GoogleSQLDatabaseEntityProviderConfig";
 import {sqladmin_v1beta4} from "googleapis";
 import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION} from "@backstage/catalog-model";
+import { GoogleProjectLocatorByConfig } from "../project-locator/GoogleProjectLocatorByConfig";
 
 describe('defaultDatabaseResourceTransformer', () => {
     it('should be defined', () => {
@@ -10,7 +11,8 @@ describe('defaultDatabaseResourceTransformer', () => {
 
     describe('when a Database instance is provided', () => {
         const config: GoogleSQLDatabaseEntityProviderConfig = {
-            project: 'project',
+            id: 'project',
+            projectLocator: new GoogleProjectLocatorByConfig("project"),
             componentLabel: 'component',
             ownerLabel: 'owner',
             resourceType: 'SQL',
@@ -26,7 +28,7 @@ describe('defaultDatabaseResourceTransformer', () => {
             name: 'database-name',
             databaseVersion: "POSTGRES_15",
             databaseInstalledVersion: "POSTGRES_15_7",
-            project: config.project,
+            project: "project",
             settings: {
                 userLabels: {
                     [config.ownerLabel]: 'owner',
@@ -43,16 +45,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        "backtostage.app/google-project": config.project,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": config.id,
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
                     links: [{
-                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
                     }]
                 },
@@ -68,7 +70,8 @@ describe('defaultDatabaseResourceTransformer', () => {
 
         it('should use unknown in a resource entity without label owner defined in database label', () => {
             const localConfig: GoogleSQLDatabaseEntityProviderConfig = {
-                project: 'project',
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'component',
                 ownerLabel: 'ownerNotPresent',
                 resourceType: 'SQL',
@@ -86,16 +89,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        "backtostage.app/google-project": config.project,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": config.id,
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
                     links: [{
-                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
                     }]
                 },
@@ -111,7 +114,8 @@ describe('defaultDatabaseResourceTransformer', () => {
 
         it('should use empty dependencies in a resource entity without label component defined in database label', () => {
             const localConfig: GoogleSQLDatabaseEntityProviderConfig = {
-                project: 'project',
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'componentNotPresent',
                 ownerLabel: 'owner',
                 resourceType: 'SQL',
@@ -129,16 +133,16 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        "backtostage.app/google-project": config.project,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": config.id,
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
                     name: 'database-name',
                     title: "database-name",
                     links: [{
-                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.project}`,
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
                     }]
                 },
@@ -160,8 +164,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 apiVersion: 'backstage.io/v1alpha1',
                 metadata: {
                     annotations: {
-                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
-                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.project}`,
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
                         
                     },
                     name: 'database-name',

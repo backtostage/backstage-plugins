@@ -7,9 +7,11 @@ import {
     readTaskScheduleDefinitionFromConfig,
     TaskScheduleDefinition,
 } from '@backstage/backend-tasks';
+import { getProjectLocator, GoogleProjectLocator } from "../project-locator";
 
 export type GoogleSQLDatabaseEntityProviderConfig = {
-    project: string
+    id: string
+    projectLocator: GoogleProjectLocator
     ownerLabel: string
     componentLabel: string
     resourceType: string
@@ -17,6 +19,7 @@ export type GoogleSQLDatabaseEntityProviderConfig = {
     schedule: TaskScheduleDefinition;
     disabled: boolean;
 }
+
 
 export function readProviderConfigs(options: {
     config: Config,
@@ -37,7 +40,8 @@ export function readProviderConfig(
     config: Config,
     resourceTransformer?: GoogleDatabaseResourceTransformer
 ): GoogleSQLDatabaseEntityProviderConfig {
-    const project = config.getString("project");
+    // when project is not defined, default to 'organization'
+    const id = config.getOptionalString("project") ?? 'organization';
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
@@ -46,7 +50,8 @@ export function readProviderConfig(
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
     return {
-        project,
+        id,
+        projectLocator: getProjectLocator(config),
         ownerLabel,
         componentLabel,
         resourceType,
@@ -55,3 +60,4 @@ export function readProviderConfig(
         disabled
     }
 }
+
