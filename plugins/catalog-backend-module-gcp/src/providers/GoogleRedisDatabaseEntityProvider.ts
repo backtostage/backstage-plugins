@@ -71,7 +71,7 @@ export class GoogleRedisDatabaseEntityProvider implements EntityProvider {
                     logger.error(`Error to transform ${db} - ${error}`)
                 }
             }
-            
+            allResources.push(...resources); 
         }
 
         await this.connection.applyMutation({
