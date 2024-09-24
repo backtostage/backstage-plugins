@@ -1,5 +1,12 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.2
+
+### Patch Changes
+
+- [#179](https://github.com/backtostage/backstage-plugins/pull/179) [`c9ee73072d28614ad7ee68d3f7487bfa25d6222b`](https://github.com/backtostage/backstage-plugins/commit/c9ee73072d28614ad7ee68d3f7487bfa25d6222b) Thanks [@angeliski](https://github.com/angeliski)! - Catch errors to list resources from gcp.
+  Now when a list a resource fails for a project, we just skip this project. Avoiding to stop all the process just because some projects raise errors
+
 ## 0.2.1
 
 ### Patch Changes
