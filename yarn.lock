@@ -4248,27 +4248,6 @@
     lodash "^4.17.21"
     uuid "^9.0.0"
 
-"@backstage/plugin-search-backend-module-techdocs@^0.1.27":
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-search-backend-module-techdocs/-/plugin-search-backend-module-techdocs-0.1.27.tgz#da3403f5ad591d2a66702678fb4fa6a4a20db67f"
-  integrity sha512-JnqLycCYS27W5o64QrpIdsuBAsvs/PsR4u9mhG3PzYvXtXXkitYzLDspQHHFTQc2LUyCoMkyPdLGl0cX3QAAjA==
-  dependencies:
-    "@backstage/backend-common" "^0.23.3"
-    "@backstage/backend-plugin-api" "^0.7.0"
-    "@backstage/backend-tasks" "^0.5.27"
-    "@backstage/catalog-client" "^1.6.5"
-    "@backstage/catalog-model" "^1.5.0"
-    "@backstage/config" "^1.2.0"
-    "@backstage/plugin-catalog-common" "^1.0.25"
-    "@backstage/plugin-catalog-node" "^1.12.4"
-    "@backstage/plugin-permission-common" "^0.8.0"
-    "@backstage/plugin-search-backend-node" "^1.2.27"
-    "@backstage/plugin-search-common" "^1.2.13"
-    "@backstage/plugin-techdocs-node" "^1.12.8"
-    lodash "^4.17.21"
-    node-fetch "^2.6.7"
-    p-limit "^3.1.0"
-
 "@backstage/plugin-search-backend-module-techdocs@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-search-backend-module-techdocs/-/plugin-search-backend-module-techdocs-0.2.2.tgz#c834efe292417ec7fd4e042ceb2800eb9585d8a8"
@@ -4453,7 +4432,7 @@
     git-url-parse "^14.0.0"
     photoswipe "^5.3.7"
 
-"@backstage/plugin-techdocs-node@^1.12.11", "@backstage/plugin-techdocs-node@^1.12.8":
+"@backstage/plugin-techdocs-node@^1.12.11":
   version "1.12.11"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-techdocs-node/-/plugin-techdocs-node-1.12.11.tgz#a26634434550e39c1f9b8a51350a37e478454eab"
   integrity sha512-mF6JKudH0YNNLNpeNepLkt0TyqGtjCQP19Q6nwAyoqJv8DJlF8UJlOHFMZvSponfFKNCJsIAjhX5BB1kxxhmVw==
@@ -9916,9 +9895,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.13.1 || ^17.0.0", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0", "@types/react@^18":
-  version "18.3.10"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.10.tgz#6edc26dc22ff8c9c226d3c7bf8357b013c842219"
-  integrity sha512-02sAAlBnP39JgXwkAq3PeU9DVaaGpZyF3MGcC0MKgQVkZor5IiiDAipVaxQHtDJAmO4GIy/rVBy/LzVj76Cyqg==
+  version "18.3.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.11.tgz#9d530601ff843ee0d7030d4227ea4360236bd537"
+  integrity sha512-r6QZ069rFTjrEYgFdOck1gK7FLVsgJE7tTz0pQBczlBNUhBNk0MQH4UbnFSwjpQLMkLzgqvBBa+qGpLje16eTQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
