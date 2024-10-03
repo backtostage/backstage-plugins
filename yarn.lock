@@ -3174,9 +3174,9 @@
     swagger-ui-react "^5.0.0"
 
 "@backstage/plugin-app-backend@^0.3.67":
-  version "0.3.74"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-app-backend/-/plugin-app-backend-0.3.74.tgz#3cbdc00118b6bb7d0a14f016bec9e927dfa35986"
-  integrity sha512-l8ZdRJgH4sGJT6Ty2H5Js4hBc4bMC5dX9zRm0b5I2mUYBiZA6AyP6nooAr+KMA9wJJlfVlL1PIYmFUcmOtC6XA==
+  version "0.3.75"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-app-backend/-/plugin-app-backend-0.3.75.tgz#10f8cf8988223bcd77cbcfc0dec07cb3bb433aba"
+  integrity sha512-I1dfzsNEhFAG2CIRl4gtPXZZBC8Ko6FdcmOTAN9lFCxW8TZ+r+C19cAhjPpTufnP68PKDJI12TyH9L4i1taN6g==
   dependencies:
     "@backstage/backend-common" "^0.25.0"
     "@backstage/backend-plugin-api" "^1.0.0"
@@ -9916,9 +9916,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.13.1 || ^17.0.0", "@types/react@^16.13.1 || ^17.0.0 || ^18.0.0", "@types/react@^18":
-  version "18.3.10"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.10.tgz#6edc26dc22ff8c9c226d3c7bf8357b013c842219"
-  integrity sha512-02sAAlBnP39JgXwkAq3PeU9DVaaGpZyF3MGcC0MKgQVkZor5IiiDAipVaxQHtDJAmO4GIy/rVBy/LzVj76Cyqg==
+  version "18.3.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.11.tgz#9d530601ff843ee0d7030d4227ea4360236bd537"
+  integrity sha512-r6QZ069rFTjrEYgFdOck1gK7FLVsgJE7tTz0pQBczlBNUhBNk0MQH4UbnFSwjpQLMkLzgqvBBa+qGpLje16eTQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
