@@ -1,5 +1,11 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.3
+
+### Patch Changes
+
+- [#206](https://github.com/backtostage/backstage-plugins/pull/206) [`ce701276e0868719ab3ac353d67726debe5e2ced`](https://github.com/backtostage/backstage-plugins/commit/ce701276e0868719ab3ac353d67726debe5e2ced) Thanks [@angeliski](https://github.com/angeliski)! - Add a suffix option to import resources and avoid name clash. To avoid errors in the config, default values are provided.
+
 ## 0.2.2
 
 ### Patch Changes
