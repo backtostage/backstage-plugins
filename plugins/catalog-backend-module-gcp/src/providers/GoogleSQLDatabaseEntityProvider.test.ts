@@ -191,8 +191,8 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                             [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                             [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                         },
-                        name: 'database-name',
-                        title: "database-name",
+                        name: 'database-name-cloudsql',
+                        title: "database-name-cloudsql",
                         links: [],
                     },
                     spec: {
@@ -214,8 +214,8 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                             [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                             [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:myProvider`,
                         },
-                        name: 'another-database-name',
-                        title: "another-database-name",
+                        name: 'another-database-name-cloudsql',
+                        title: "another-database-name-cloudsql",
                         links: [],
                     },
                     spec: {
