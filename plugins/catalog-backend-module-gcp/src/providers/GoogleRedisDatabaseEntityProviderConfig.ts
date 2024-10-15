@@ -16,6 +16,7 @@ export type GoogleRedisDatabaseEntityProviderConfig = {
     ownerLabel: string
     componentLabel: string
     resourceType: string
+    suffix: string
     resourceTransformer: GoogleRedisResourceTransformer
     schedule: TaskScheduleDefinition;
     disabled: boolean;
@@ -45,6 +46,7 @@ export function readProviderConfig(
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
     const resourceType = config.getOptionalString('redis.resourceType') ?? 'Memorystore Redis'
+    const suffix = config.getOptionalString('redis.suffix') ?? 'redis'
     const location = config.getOptionalString('redis.location')
 
     const disabled = config.getOptionalBoolean('redis.disabled') || false;
@@ -56,6 +58,7 @@ export function readProviderConfig(
         ownerLabel,
         componentLabel,
         resourceType,
+        suffix,
         location,
         projectLocator: getProjectLocator(config),
         resourceTransformer: resourceTransformer ?? defaultRedisResourceTransformer,

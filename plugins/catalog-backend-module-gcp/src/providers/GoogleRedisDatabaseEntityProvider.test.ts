@@ -191,7 +191,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                             [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:myProvider`,
                             "backtostage.app/google-project": "myProvider",
                         },
-                        name: 'database-name',
+                        name: 'database-name-redis',
                         links: [
                             {
                                 title: "Redis URL",
@@ -219,7 +219,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                             [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:myProvider`,
                             "backtostage.app/google-project": "myProvider",
                         },
-                        name: 'another-database-name',
+                        name: 'another-database-name-redis',
                         links: [
                             {
                                 title: "Redis URL",
@@ -318,7 +318,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                             [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:myProvider`,
                             "backtostage.app/google-project": "myProvider",
                         },
-                        name: 'another-database-name',
+                        name: 'another-database-name-redis',
                         links: [
                             {
                                 title: "Redis URL",
