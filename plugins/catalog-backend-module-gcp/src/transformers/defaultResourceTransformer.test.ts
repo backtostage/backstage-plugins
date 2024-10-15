@@ -16,6 +16,7 @@ describe('defaultDatabaseResourceTransformer', () => {
             componentLabel: 'component',
             ownerLabel: 'owner',
             resourceType: 'SQL',
+            suffix: "sql",
             resourceTransformer: defaultDatabaseResourceTransformer,
             schedule: {
                 frequency: { minutes: 30 },
@@ -51,8 +52,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
-                    name: 'database-name',
-                    title: "database-name",
+                    name: 'database-name-sql',
+                    title: "database-name-sql",
                     links: [{
                         url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
@@ -75,6 +76,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 componentLabel: 'component',
                 ownerLabel: 'ownerNotPresent',
                 resourceType: 'SQL',
+                suffix: "sql",
                 resourceTransformer: defaultDatabaseResourceTransformer,
                 schedule: {
                     frequency: { minutes: 30 },
@@ -95,8 +97,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
-                    name: 'database-name',
-                    title: "database-name",
+                    name: 'database-name-sql',
+                    title: "database-name-sql",
                     links: [{
                         url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
@@ -119,6 +121,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 componentLabel: 'componentNotPresent',
                 ownerLabel: 'owner',
                 resourceType: 'SQL',
+                suffix: "sql",
                 resourceTransformer: defaultDatabaseResourceTransformer,
                 schedule: {
                     frequency: { minutes: 30 },
@@ -139,8 +142,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         "backtostage.app/google-sql-database-version": "POSTGRES_15",
                         "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
                     },
-                    name: 'database-name',
-                    title: "database-name",
+                    name: 'database-name-sql',
+                    title: "database-name-sql",
                     links: [{
                         url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
                         title: "Database URL"
@@ -168,8 +171,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
                         
                     },
-                    name: 'database-name',
-                    title: "database-name",
+                    name: 'database-name-sql',
+                    title: "database-name-sql",
                     links: [],
                 },
                 spec: {

@@ -73,10 +73,12 @@ catalog:
         componentLabel: app # string
         cloudsql:
           resourceType: SQL  # string
+          suffix: sql  # string
           disabled: true # boolean
         redis:
           resourceType: Redis  # string
           location: us-central1 # string
+          suffix: memorystoreredis  # string
           disabled: true # boolean
         schedule: # same options as in TaskScheduleDefinition
           # supports cron, ISO duration, "human duration" as used in code
@@ -124,6 +126,9 @@ This provider supports multiple projects using different configurations.
     - **`resourceType`** _(optional)_:
       - Default: `CloudSQL`.
       - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
+    - **`suffix`** _(optional)_:
+      - Default: `cloudsql`.
+      - The provider will set the suffix to create a unique name for this resource.
     - **`disabled`** _(optional)_:
       - Default: `false`.
       - The entity provider will skip this configuration when disabled.
@@ -132,6 +137,9 @@ This provider supports multiple projects using different configurations.
     - **`resourceType`** _(optional)_:
       - Default: `Memorystore Redis`.
       - The provider will set the [`type`](https://backstage.io/docs/features/software-catalog/descriptor-format#spectype-required-4) based in this information.
+    - **`suffix`** _(optional)_:
+      - Default: `redis`.
+      - The provider will set the suffix to create a unique name for this resource.
     - **`location`** _(optional)_:
       - Default: `` Wildcard value to [Google API](https://cloud.google.com/memorystore/docs/redis/reference/rest/v1beta1/projects.locations.instances/list)
       - You can narrow the location to list. When not provided instances from all locations will be listed

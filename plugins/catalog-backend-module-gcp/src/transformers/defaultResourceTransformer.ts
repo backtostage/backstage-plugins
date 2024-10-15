@@ -40,8 +40,8 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
         apiVersion: 'backstage.io/v1alpha1',
         metadata: {
             annotations,
-            name: database.name!,
-            title: database.name!,
+            name: `${database.name!}-${providerConfig.suffix}`,
+            title: `${database.name!}-${providerConfig.suffix}`,
             links,
         },
         spec: {
@@ -92,7 +92,7 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
         apiVersion: 'backstage.io/v1alpha1',
         metadata: {
             annotations,
-            name: redisNameGroup.name,
+            name: `${redisNameGroup.name}-${providerConfig.suffix}`,
             links,
         },
         spec: {
