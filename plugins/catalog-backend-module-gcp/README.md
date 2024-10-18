@@ -132,6 +132,9 @@ This provider supports multiple projects using different configurations.
     - **`disabled`** _(optional)_:
       - Default: `false`.
       - The entity provider will skip this configuration when disabled.
+    - **`namespaceByProject`** _(optional)_:
+      - Default: `false`.
+      - The entity provider will use the project in namespace field. The namespace `default` is used when nothing is defined in this config.
 
 - **`redis`** _(optional)_:
     - **`resourceType`** _(optional)_:
@@ -146,6 +149,10 @@ This provider supports multiple projects using different configurations.
     - **`disabled`** _(optional)_:
       - Default: `false`.
       - The entity provider will skip this configuration when disabled.
+    - **`namespaceByProject`** _(optional)_:
+      - Default: `false`.
+      - The entity provider will use the project in namespace field. The namespace `default` is used when nothing is defined in this config.
+
 
 - **`schedule`** _(required)_:
     - **`frequency`**:
