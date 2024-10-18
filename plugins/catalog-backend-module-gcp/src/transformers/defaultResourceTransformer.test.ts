@@ -1,8 +1,9 @@
-import {defaultDatabaseResourceTransformer} from "./defaultResourceTransformer";
+import {defaultDatabaseResourceTransformer, defaultRedisResourceTransformer} from "./defaultResourceTransformer";
 import {GoogleSQLDatabaseEntityProviderConfig} from "../providers/GoogleSQLDatabaseEntityProviderConfig";
-import {sqladmin_v1beta4} from "googleapis";
+import {redis_v1beta1, sqladmin_v1beta4} from "googleapis";
 import {ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION} from "@backstage/catalog-model";
 import { GoogleProjectLocatorByConfig } from "../project-locator/GoogleProjectLocatorByConfig";
+import { GoogleRedisDatabaseEntityProviderConfig } from "../providers/GoogleRedisDatabaseEntityProviderConfig";
 
 describe('defaultDatabaseResourceTransformer', () => {
     it('should be defined', () => {
@@ -228,6 +229,224 @@ describe('defaultDatabaseResourceTransformer', () => {
                     ],
                     owner: 'owner',
                     type: 'SQL'
+                }
+            })
+        })
+    })
+
+    describe('when a Redis instance is provided', () => {
+        const config: GoogleRedisDatabaseEntityProviderConfig = {
+            id: 'project',
+            projectLocator: new GoogleProjectLocatorByConfig("project"),
+            componentLabel: 'component',
+            ownerLabel: 'owner',
+            resourceType: 'redis',
+            suffix: "memorystore",
+            resourceTransformer: defaultRedisResourceTransformer,
+            schedule: {
+                frequency: { minutes: 30 },
+                timeout: { minutes: 3 },
+            },
+            disabled: true,
+            namespaceByProject: false
+        }
+
+        const database: redis_v1beta1.Schema$Instance = {
+            name: 'projects/my-project/locations/us-central1/instances/database-name',
+            redisVersion: "REDIS_4",
+
+            labels: {
+                [config.ownerLabel]: 'owner',
+                [config.componentLabel]: 'my-service',
+            }
+        }
+
+        it('should transform in a resource entity', () => {
+
+            const result = config.resourceTransformer(config, database);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": "my-project",
+                        "backtostage.app/google-redis-database-version": "REDIS_4",
+                    },
+                    name: 'database-name-memorystore',
+                    links: [{
+                        url : `https://console.cloud.google.com/memorystore/redis/locations/us-central1/instances/database-name/details/overview?project=my-project`,
+                        title: "Redis URL"
+                    }]
+                },
+                spec: {
+                    dependencyOf: [
+                        'component:my-service'
+                    ],
+                    owner: 'owner',
+                    type: 'redis'
+                }
+            })
+        })
+
+        it('should use unknown in a resource entity without label owner defined in database label', () => {
+            const localConfig: GoogleRedisDatabaseEntityProviderConfig = {
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
+                componentLabel: 'component',
+                ownerLabel: 'otherOwner',
+                resourceType: 'redis',
+                suffix: "memorystore",
+                resourceTransformer: defaultRedisResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                },
+                disabled: true,
+                namespaceByProject: false
+            }
+    
+
+            const result = config.resourceTransformer(localConfig, database);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": "my-project",
+                        "backtostage.app/google-redis-database-version": "REDIS_4",
+                    },
+                    name: 'database-name-memorystore',
+                    links: [{
+                        url : `https://console.cloud.google.com/memorystore/redis/locations/us-central1/instances/database-name/details/overview?project=my-project`,
+                        title: "Redis URL"
+                    }]
+                },
+                spec: {
+                    dependencyOf: [
+                        'component:my-service'
+                    ],
+                    owner: 'unknown',
+                    type: 'redis'
+                }
+            })
+        })
+
+        it('should use empty dependencies in a resource entity without label component defined in database label', () => {
+            const localConfig: GoogleRedisDatabaseEntityProviderConfig = {
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
+                componentLabel: 'otherComponent',
+                ownerLabel: 'owner',
+                resourceType: 'redis',
+                suffix: "memorystore",
+                resourceTransformer: defaultRedisResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                },
+                disabled: true,
+                namespaceByProject: false
+            }
+    
+
+            const result = config.resourceTransformer(localConfig, database);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": "my-project",
+                        "backtostage.app/google-redis-database-version": "REDIS_4",
+                    },
+                    name: 'database-name-memorystore',
+                    links: [{
+                        url : `https://console.cloud.google.com/memorystore/redis/locations/us-central1/instances/database-name/details/overview?project=my-project`,
+                        title: "Redis URL"
+                    }]
+                },
+                spec: {
+                    owner: 'owner',
+                    type: 'redis'
+                }
+            })
+        })
+
+        it('should use empty values in a resource entity without user settings defined in database', () => {
+            const localDatabase: redis_v1beta1.Schema$Instance = {
+                name: 'projects/my-project/locations/us-central1/instances/database-name',
+            }
+
+            const result = config.resourceTransformer(config, localDatabase);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": "my-project",
+                    },
+                    name: 'database-name-memorystore',
+                    links: [{
+                        url : `https://console.cloud.google.com/memorystore/redis/locations/us-central1/instances/database-name/details/overview?project=my-project`,
+                        title: "Redis URL"
+                    }]
+                },
+                spec: {
+                    owner: 'unknown',
+                    type: 'redis'
+                }
+            })
+        })
+
+        it('should set namespace by project', () => {
+            const localConfig: GoogleRedisDatabaseEntityProviderConfig = {
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
+                componentLabel: 'component',
+                ownerLabel: 'owner',
+                resourceType: 'redis',
+                suffix: "memorystore",
+                resourceTransformer: defaultRedisResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                },
+                disabled: true,
+                namespaceByProject: true
+            }
+    
+
+            const result = config.resourceTransformer(localConfig, database);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": "my-project",
+                        "backtostage.app/google-redis-database-version": "REDIS_4",
+                    },
+                    name: 'database-name-memorystore',
+                    namespace: "my-project",
+                    links: [{
+                        url : `https://console.cloud.google.com/memorystore/redis/locations/us-central1/instances/database-name/details/overview?project=my-project`,
+                        title: "Redis URL"
+                    }]
+                },
+                spec: {
+                    dependencyOf: [
+                        'component:my-service'
+                    ],
+                    owner: 'owner',
+                    type: 'redis'
                 }
             })
         })

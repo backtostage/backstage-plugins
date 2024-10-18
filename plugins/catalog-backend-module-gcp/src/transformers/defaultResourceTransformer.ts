@@ -4,7 +4,6 @@ import { sqladmin_v1beta4, redis_v1beta1 } from "googleapis";
 import { ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity } from "@backstage/catalog-model";
 import { GoogleOrganizationProjectEntityProviderConfig } from "../providers/GoogleOrganizationProjectEntityProviderConfig";
 import { google } from '@google-cloud/resource-manager/build/protos/protos';
-import { config } from "winston";
 
 export const ANNOTATION_DATABASE_VERSION = "backtostage.app/google-sql-database-version"
 export const ANNOTATION_DATABASE_INSTALLED_VERSION = "backtostage.app/google-sql-database-installed-version"
@@ -105,6 +104,10 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
             type: providerConfig.resourceType,
         }
     };
+
+    if(providerConfig.namespaceByProject) {
+        resource.metadata.namespace = redisNameGroup.project.toLocaleLowerCase('en-US');
+    }
 
 
     if (component) {
