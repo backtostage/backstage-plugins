@@ -68,6 +68,8 @@ describe('readProviderConfigs', () => {
         expect(providerConfigs[0].componentLabel).toEqual('component');
         expect(providerConfigs[0].resourceType).toEqual('Memorystore Redis');
         expect(providerConfigs[0].suffix).toEqual('redis');
+        expect(providerConfigs[0].disabled).toBeFalsy();
+        expect(providerConfigs[0].namespaceByProject).toBeFalsy();
         expect(providerConfigs[0].resourceTransformer).toBeDefined();
         expect(providerConfigs[0].schedule).toBeDefined();
 
@@ -89,7 +91,7 @@ describe('readProviderConfigs', () => {
                             project: 'my-other-project',
                             ownerLabel: 'team',
                             componentLabel: 'app',
-                            redis: { resourceType: 'database', location: "us-central1", suffix: "database" },
+                            redis: { resourceType: 'database', location: "us-central1", suffix: "database", namespaceByProject: true },
                             schedule: {
                                 frequency: { minutes: 30 },
                                 timeout: { minutes: 3 },
@@ -116,7 +118,8 @@ describe('readProviderConfigs', () => {
                 frequency: { minutes: 10 },
                 timeout: { minutes: 3 },
             },
-            disabled: false
+            disabled: false,
+            namespaceByProject: false
         });
 
         expect(providerConfigs[1]).toEqual({
@@ -134,7 +137,8 @@ describe('readProviderConfigs', () => {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
             },
-            disabled: false
+            disabled: false,
+            namespaceByProject: true,
         });
 
     });

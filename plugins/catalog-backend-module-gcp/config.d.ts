@@ -29,7 +29,9 @@ export interface Config {
            * Default: `CloudSQL`.
            */
           resourceType?: string;
+          suffix?: string;
           disabled?: boolean;
+          namespaceByProject?: boolean;
         },
         
         redis?: {
@@ -43,7 +45,9 @@ export interface Config {
            * Default: `Wildcard for all locations`.
            */
           location?: string;
+          suffix?: string;
           disabled?: boolean;
+          namespaceByProject?: boolean;
         }
 
         /**

@@ -50,6 +50,10 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
         }
     };
 
+    if(providerConfig.namespaceByProject && database.project) {
+        resource.metadata.namespace = database.project.toLocaleLowerCase('en-US');
+    }
+
     if (component) {
         resource.spec.dependencyOf = [
             `component:${component}`
@@ -100,6 +104,11 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
             type: providerConfig.resourceType,
         }
     };
+
+    if(providerConfig.namespaceByProject) {
+        resource.metadata.namespace = redisNameGroup.project.toLocaleLowerCase('en-US');
+    }
+
 
     if (component) {
         resource.spec.dependencyOf = [
