@@ -72,6 +72,8 @@ describe('readProviderConfigs', () => {
         expect(providerConfigs[0].suffix).toEqual('cloudsql');
         expect(providerConfigs[0].resourceTransformer).toBeDefined();
         expect(providerConfigs[0].schedule).toBeDefined();
+        expect(providerConfigs[0].disabled).toBeFalsy();
+        expect(providerConfigs[0].namespaceByProject).toBeFalsy();
 
     });
 
@@ -103,7 +105,7 @@ describe('readProviderConfigs', () => {
                             },
                             ownerLabel: 'team',
                             componentLabel: 'app',
-                            cloudsql: { resourceType: 'SQL', suffix: "sql", },
+                            cloudsql: { resourceType: 'SQL', suffix: "sql", namespaceByProject: true },
                             schedule: {
                                 frequency: { minutes: 30 },
                                 timeout: { minutes: 3 },
@@ -132,6 +134,7 @@ describe('readProviderConfigs', () => {
                 timeout: { minutes: 3 },
             },
             disabled: false,
+            namespaceByProject: false
         });
 
         expect(providerConfigs[1]).toEqual({
@@ -149,6 +152,7 @@ describe('readProviderConfigs', () => {
                 timeout: { minutes: 3 },
             },
             disabled: false,
+            namespaceByProject: false
         });
 
         expect(providerConfigs[2]).toEqual({
@@ -166,6 +170,7 @@ describe('readProviderConfigs', () => {
                 timeout: { minutes: 3 },
             },
             disabled: false,
+            namespaceByProject: true
         });
 
     });

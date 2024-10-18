@@ -22,7 +22,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
             },
-            disabled: true
+            disabled: true,
+            namespaceByProject: false
         }
 
         const database: sqladmin_v1beta4.Schema$DatabaseInstance = {
@@ -82,7 +83,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                     frequency: { minutes: 30 },
                     timeout: { minutes: 3 },
                 },
-                disabled: true
+                disabled: true,
+                namespaceByProject: false
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);
@@ -127,7 +129,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                     frequency: { minutes: 30 },
                     timeout: { minutes: 3 },
                 },
-                disabled: true
+                disabled: true,
+                namespaceByProject: false
             }
 
             const result = defaultDatabaseResourceTransformer(localConfig, database);
@@ -177,6 +180,53 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     owner: 'unknown',
+                    type: 'SQL'
+                }
+            })
+        })
+
+        it('should set namespace by project', () => {
+            const localConfig: GoogleSQLDatabaseEntityProviderConfig = {
+                id: 'project',
+                projectLocator: new GoogleProjectLocatorByConfig("project"),
+                componentLabel: 'component',
+                ownerLabel: 'owner',
+                resourceType: 'SQL',
+                suffix: "sql",
+                resourceTransformer: defaultDatabaseResourceTransformer,
+                schedule: {
+                    frequency: { minutes: 30 },
+                    timeout: { minutes: 3 },
+                },
+                disabled: true,
+                namespaceByProject: true
+            }
+
+            const result = defaultDatabaseResourceTransformer(localConfig, database);
+            expect(result).toEqual({
+                kind: 'Resource',
+                apiVersion: 'backstage.io/v1alpha1',
+                metadata: {
+                    annotations: {
+                        [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
+                        "backtostage.app/google-project": config.id,
+                        "backtostage.app/google-sql-database-version": "POSTGRES_15",
+                        "backtostage.app/google-sql-database-installed-version": "POSTGRES_15_7",
+                    },
+                    namespace: "project",
+                    name: 'database-name-sql',
+                    title: "database-name-sql",
+                    links: [{
+                        url : `https://console.cloud.google.com/sql/instances/database-name/overview?project=${config.id}`,
+                        title: "Database URL"
+                    }]
+                },
+                spec: {
+                    dependencyOf: [
+                        'component:my-service'
+                    ],
+                    owner: 'owner',
                     type: 'SQL'
                 }
             })

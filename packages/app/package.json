@@ -16,6 +16,8 @@
     "test:e2e:ci": "cross-env PORT=3001 start-server-and-test start http://localhost:3001 cy:run"
   },
   "dependencies": {
+    "@backstage-community/plugin-github-actions": "^0.6.16",
+    "@backstage-community/plugin-tech-radar": "^0.7.4",
     "@backstage/app-defaults": "^1.5.11",
     "@backstage/catalog-model": "^1.7.0",
     "@backstage/cli": "^0.27.1",
@@ -46,9 +48,7 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.16.0",
     "react-router-dom": "^6.16.0",
-    "react-use": "^17.4.0",
-    "@backstage-community/plugin-github-actions": "^0.6.16",
-    "@backstage-community/plugin-tech-radar": "^0.7.4"
+    "react-use": "^17.4.0"
   },
   "devDependencies": {
     "@backstage/test-utils": "^1.6.0",

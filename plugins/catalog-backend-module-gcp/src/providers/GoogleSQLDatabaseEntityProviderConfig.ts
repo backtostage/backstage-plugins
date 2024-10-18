@@ -16,6 +16,7 @@ export type GoogleSQLDatabaseEntityProviderConfig = {
     componentLabel: string
     resourceType: string
     suffix: string
+    namespaceByProject: boolean
     resourceTransformer: GoogleDatabaseResourceTransformer
     schedule: TaskScheduleDefinition;
     disabled: boolean;
@@ -48,6 +49,7 @@ export function readProviderConfig(
     const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
     const suffix = config.getOptionalString('cloudsql.suffix') ?? 'cloudsql'
     const disabled = config.getOptionalBoolean('cloudsql.disabled') || false;
+    const namespaceByProject = config.getOptionalBoolean('cloudsql.namespaceByProject') || false;
 
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
 
@@ -60,7 +62,8 @@ export function readProviderConfig(
         suffix,
         resourceTransformer: resourceTransformer ?? defaultDatabaseResourceTransformer,
         schedule,
-        disabled
+        disabled,
+        namespaceByProject
     }
 }
 
