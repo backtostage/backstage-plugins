@@ -1,5 +1,14 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.4
+
+### Patch Changes
+
+- [#210](https://github.com/backtostage/backstage-plugins/pull/210) [`5398fd6043de81c834e1b1689ba19c649ab60f1c`](https://github.com/backtostage/backstage-plugins/commit/5398fd6043de81c834e1b1689ba19c649ab60f1c) Thanks [@angeliski](https://github.com/angeliski)! - add namespaceByProject option to resources. You can use that to avoid clash in the default namespace
+
+  > [!IMPORTANT]
+  > We don't remove Resources from the `default` namespace when `namespaceByProject` is enabled. So you need to clean that to avoid duplications
+
 ## 0.2.3
 
 ### Patch Changes
