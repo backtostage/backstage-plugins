@@ -4,6 +4,7 @@ import { sqladmin_v1beta4, redis_v1beta1 } from "googleapis";
 import { ANNOTATION_LOCATION, ANNOTATION_ORIGIN_LOCATION, ResourceEntity } from "@backstage/catalog-model";
 import { GoogleOrganizationProjectEntityProviderConfig } from "../providers/GoogleOrganizationProjectEntityProviderConfig";
 import { google } from '@google-cloud/resource-manager/build/protos/protos';
+import { DEFAULT_NAMESPACE } from '@backstage/catalog-model';
 
 export const ANNOTATION_DATABASE_VERSION = "backtostage.app/google-sql-database-version"
 export const ANNOTATION_DATABASE_INSTALLED_VERSION = "backtostage.app/google-sql-database-installed-version"
@@ -45,7 +46,7 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
             links,
         },
         spec: {
-            owner: owner || 'unknown',
+            owner: `${DEFAULT_NAMESPACE}/${owner || 'unknown'}`,
             type: providerConfig.resourceType,
         }
     };
@@ -100,7 +101,7 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
             links,
         },
         spec: {
-            owner: owner || 'unknown',
+            owner: `${DEFAULT_NAMESPACE}/${owner || 'unknown'}`,
             type: providerConfig.resourceType,
         }
     };

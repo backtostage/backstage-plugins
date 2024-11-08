@@ -203,7 +203,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                         dependencyOf: [
                             'component:my-service'
                         ],
-                        owner: 'owner',
+                        owner: 'default/owner',
                         type: 'Memorystore Redis'
                     }
                 },
@@ -231,7 +231,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                         dependencyOf: [
                             'component:my-other-service'
                         ],
-                        owner: 'owner2',
+                        owner: 'default/owner2',
                         type: 'Memorystore Redis'
                     }
                 },
@@ -330,7 +330,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
                         dependencyOf: [
                             'component:my-other-service'
                         ],
-                        owner: 'owner2',
+                        owner: 'default/owner2',
                         type: 'Memorystore Redis'
                     }
                 },
