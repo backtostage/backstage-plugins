@@ -197,7 +197,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                     },
                     spec: {
                         dependencyOf: [
-                            'component:my-service'
+                            'component:default/my-service'
                         ],
                         owner: 'default/owner',
                         type: 'CloudSQL'
@@ -220,7 +220,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
                     },
                     spec: {
                         dependencyOf: [
-                            'component:my-other-service'
+                            'component:default/my-other-service'
                         ],
                         owner: 'default/owner2',
                         type: 'CloudSQL'
