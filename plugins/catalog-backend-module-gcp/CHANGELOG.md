@@ -1,5 +1,13 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.2.5
+
+### Patch Changes
+
+- [#226](https://github.com/backtostage/backstage-plugins/pull/226) [`cb3100fb02815a8c3063e6575521ad281e2d3cf0`](https://github.com/backtostage/backstage-plugins/commit/cb3100fb02815a8c3063e6575521ad281e2d3cf0) Thanks [@angeliski](https://github.com/angeliski)! - fix unexpected component namespace behavior on use namespaceByProject
+
+- [#225](https://github.com/backtostage/backstage-plugins/pull/225) [`cac1a87e49a9c630e2e3d760e79a7fdbebbf14fd`](https://github.com/backtostage/backstage-plugins/commit/cac1a87e49a9c630e2e3d760e79a7fdbebbf14fd) Thanks [@angeliski](https://github.com/angeliski)! - fix unexpected owner namespace behavior on use namespaceByProject
+
 ## 0.2.4
 
 ### Patch Changes
