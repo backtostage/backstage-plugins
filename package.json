@@ -33,7 +33,7 @@
     "@changesets/cli": "^2.26.2",
     "@spotify/prettier-config": "^15.0.0",
     "concurrently": "^8.2.1",
-    "lerna": "^7.3.1",
+    "lerna": "^8.1.9",
     "node-gyp": "^9.4.0",
     "prettier": "^3.0.3",
     "typescript": "~5.2.2"
