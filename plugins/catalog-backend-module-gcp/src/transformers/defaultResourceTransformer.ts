@@ -57,7 +57,7 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
 
     if (component) {
         resource.spec.dependencyOf = [
-            `component:${component}`
+            `component:${DEFAULT_NAMESPACE}/${component}`
         ]
     }
 
@@ -113,7 +113,7 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
 
     if (component) {
         resource.spec.dependencyOf = [
-            `component:${component}`
+            `component:${DEFAULT_NAMESPACE}/${component}`
         ]
     }
 

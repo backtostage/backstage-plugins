@@ -63,7 +63,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/owner',
                     type: 'SQL'
@@ -109,7 +109,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/unknown',
                     type: 'SQL'
@@ -225,7 +225,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/owner',
                     type: 'SQL'
@@ -282,7 +282,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/owner',
                     type: 'redis'
@@ -327,7 +327,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/unknown',
                     type: 'redis'
@@ -443,7 +443,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     dependencyOf: [
-                        'component:my-service'
+                        'component:default/my-service'
                     ],
                     owner: 'default/owner',
                     type: 'redis'
