@@ -5163,7 +5163,7 @@ __metadata:
     "@types/uuid": "npm:^10.0.0"
     express: "npm:^4.18.2"
     express-promise-router: "npm:^4.1.1"
-    googleapis: "npm:^127.0.0"
+    googleapis: "npm:^144.0.0"
     msw: "npm:^1.3.2"
     node-fetch: "npm:^3.3.2"
     supertest: "npm:^6.3.3"
@@ -20214,13 +20214,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"googleapis@npm:^127.0.0":
-  version: 127.0.0
-  resolution: "googleapis@npm:127.0.0"
+"googleapis@npm:^144.0.0":
+  version: 144.0.0
+  resolution: "googleapis@npm:144.0.0"
   dependencies:
     google-auth-library: "npm:^9.0.0"
     googleapis-common: "npm:^7.0.0"
-  checksum: 10c0/27522132b39b260400b1f62b8339a35c48b27ed94cf903097ed1e28486457eaf21d3f33117e7bdab0fe1f88622d081bfaea16f46a974847416069adb59c4dfb0
+  checksum: 10c0/a5ad4c5be32817f7960fac2aa52b1bbc658242ed1874fb08ed84dbdf36b9fa401077e6e425928e453629d14b1f0d54ee31a1dc0959705465b489f31bd3f36f4a
   languageName: node
   linkType: hard
 
@@ -32571,7 +32571,7 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>":
   version: 5.6.2
-  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=379a07"
+  resolution: "typescript@patch:typescript@npm%3A5.6.2#optional!builtin<compat/typescript>::version=5.6.2&hash=5adc0c"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -32591,11 +32591,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A~5.5.0#optional!builtin<compat/typescript>":
   version: 5.5.4
-  resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"
+  resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=5adc0c"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/73409d7b9196a5a1217b3aaad929bf76294d3ce7d6e9766dd880ece296ee91cf7d7db6b16c6c6c630ee5096eccde726c0ef17c7dfa52b01a243e57ae1f09ef07
+  checksum: 10c0/10dd9881baba22763de859e8050d6cb6e2db854197495c6f1929b08d1eb2b2b00d0b5d9b0bcee8472f1c3f4a7ef6a5d7ebe0cfd703f853aa5ae465b8404bc1ba
   languageName: node
   linkType: hard
 
