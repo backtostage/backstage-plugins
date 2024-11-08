@@ -65,7 +65,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'SQL'
                 }
             })
@@ -111,7 +111,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'unknown',
+                    owner: 'default/unknown',
                     type: 'SQL'
                 }
             })
@@ -154,7 +154,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     }]
                 },
                 spec: {
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'SQL'
                 }
             })
@@ -180,7 +180,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     links: [],
                 },
                 spec: {
-                    owner: 'unknown',
+                    owner: 'default/unknown',
                     type: 'SQL'
                 }
             })
@@ -227,7 +227,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'SQL'
                 }
             })
@@ -284,7 +284,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'redis'
                 }
             })
@@ -329,7 +329,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'unknown',
+                    owner: 'default/unknown',
                     type: 'redis'
                 }
             })
@@ -371,7 +371,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     }]
                 },
                 spec: {
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'redis'
                 }
             })
@@ -399,7 +399,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     }]
                 },
                 spec: {
-                    owner: 'unknown',
+                    owner: 'default/unknown',
                     type: 'redis'
                 }
             })
@@ -445,7 +445,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     dependencyOf: [
                         'component:my-service'
                     ],
-                    owner: 'owner',
+                    owner: 'default/owner',
                     type: 'redis'
                 }
             })
