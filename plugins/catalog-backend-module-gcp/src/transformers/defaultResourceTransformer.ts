@@ -35,6 +35,7 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
 
     const owner = database.settings?.userLabels?.[providerConfig.ownerLabel]
     const component = database.settings?.userLabels?.[providerConfig.componentLabel];
+    const system = database.settings?.userLabels?.[providerConfig.systemLabel];
 
     const resource: ResourceEntity = {
         kind: 'Resource',
@@ -48,6 +49,7 @@ export const defaultDatabaseResourceTransformer: GoogleDatabaseResourceTransform
         spec: {
             owner: `${DEFAULT_NAMESPACE}/${owner || 'unknown'}`,
             type: providerConfig.resourceType,
+            system: system ? `${DEFAULT_NAMESPACE}/${system}` : undefined,
         }
     };
 
@@ -71,17 +73,17 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
         [ANNOTATION_LOCATION]: `google-redis-database-entity-provider:${providerConfig.id}`,
         [ANNOTATION_ORIGIN_LOCATION]: `google-redis-database-entity-provider:${providerConfig.id}`,
     };
-    
+
     const redisNameGroup = REDIS_NAME_PARSE.exec(redis.name?? "")?.groups
     if(!redisNameGroup) {
         // we assume a strong error if something goes wrong in this step
         throw new Error("Parsing Redis instance resulted in error")
     }
-    
+
 
     annotations[ANNOTATION_GCP_PROJECT] = redisNameGroup.project
     if (redis.redisVersion) annotations[ANNOTATION_REDIS_VERSION] = redis.redisVersion
-    
+
     const links = []
 
     if (redisNameGroup.name && redisNameGroup.project) links.push({
@@ -91,6 +93,7 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
 
     const owner = redis.labels?.[providerConfig.ownerLabel]
     const component = redis.labels?.[providerConfig.componentLabel];
+    const system = redis.labels?.[providerConfig.systemLabel];
 
     const resource: ResourceEntity = {
         kind: 'Resource',
@@ -103,6 +106,7 @@ export const defaultRedisResourceTransformer: GoogleRedisResourceTransformer = (
         spec: {
             owner: `${DEFAULT_NAMESPACE}/${owner || 'unknown'}`,
             type: providerConfig.resourceType,
+            system: system ? `${DEFAULT_NAMESPACE}/${system}` : undefined,
         }
     };
 
@@ -140,10 +144,10 @@ export const defaultOrganizationProjectResourceTransformer: GoogleOrganizationPr
         // we assume a strong error if something goes wrong in this step
         throw new Error("Parsing Project name resulted in error")
     }
-    
+
 
     annotations[ANNOTATION_GCP_PROJECT] = project.projectId || projectNameGroup.name
-    
+
     const links = []
 
     if (projectNameGroup.name) links.push({
@@ -153,6 +157,7 @@ export const defaultOrganizationProjectResourceTransformer: GoogleOrganizationPr
 
     const owner = project.labels?.[providerConfig.ownerLabel]
     const component = project.labels?.[providerConfig.componentLabel];
+    const system = project.labels?.[providerConfig.systemLabel];
 
     const resource: ResourceEntity = {
         kind: 'Resource',
@@ -167,6 +172,7 @@ export const defaultOrganizationProjectResourceTransformer: GoogleOrganizationPr
         spec: {
             owner: owner || 'unknown',
             type: providerConfig.resourceType,
+            system: system ? system : undefined,
         }
     };
 
