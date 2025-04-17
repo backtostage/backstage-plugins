@@ -71,6 +71,7 @@ catalog:
       - project: my-gcp-project-id
         ownerLabel: team # string
         componentLabel: app # string
+        systemLabel: system # string
         cloudsql:
           resourceType: SQL  # string
           suffix: sql  # string
@@ -122,6 +123,10 @@ This provider supports multiple projects using different configurations.
   - Default: `component`.
   - The provider will look for user defined labels to find the Resource [dependencyOf](https://backstage.io/docs/features/software-catalog/well-known-relations#dependson-and-dependencyof).
   - You can provide the label name where the component name is present, if the label isn't present `dependencyOf` will be skipped.
+- **`systemLabel`** _(optional)_:
+  - Default: `system`.
+  - The provider will look for user defined labels to find the Resource system.
+  - You can provide the label name where the system name is present, if the label isn't present the system field will be skipped.
 - **`cloudsql`** _(optional)_:
     - **`resourceType`** _(optional)_:
       - Default: `CloudSQL`.
