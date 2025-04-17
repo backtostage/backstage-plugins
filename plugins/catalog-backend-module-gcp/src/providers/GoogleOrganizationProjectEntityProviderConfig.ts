@@ -13,6 +13,7 @@ export type GoogleOrganizationProjectEntityProviderConfig = {
     query?: string
     ownerLabel: string
     componentLabel: string
+    systemLabel: string
     resourceType: string
     resourceTransformer: GoogleOrganizationProjectResourceTransformer
     schedule: TaskScheduleDefinition;
@@ -42,6 +43,7 @@ export function readProviderConfig(
     const query = config.getOptionalString("organization.query");
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
+    const systemLabel = config.getOptionalString('systemLabel') ?? 'system'
     const resourceType = config.getOptionalString('organization.resourceType') ?? 'GCP Project'
 
     const schedule = readTaskScheduleDefinitionFromConfig(config.getConfig('schedule'));
@@ -58,6 +60,7 @@ export function readProviderConfig(
         query,
         ownerLabel,
         componentLabel,
+        systemLabel,
         resourceType,
         resourceTransformer: resourceTransformer ?? defaultOrganizationProjectResourceTransformer,
         schedule,
