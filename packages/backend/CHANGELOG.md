@@ -1,5 +1,12 @@
 # backend
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`b9aadf4c4956f0e91ab56e4f9fa8731b907d513e`](https://github.com/backtostage/backstage-plugins/commit/b9aadf4c4956f0e91ab56e4f9fa8731b907d513e)]:
+  - @backtostage/plugin-catalog-backend-module-gcp@0.3.0
+
 ## 0.0.2
 
 ### Patch Changes
