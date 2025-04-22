@@ -16,6 +16,7 @@ describe('defaultDatabaseResourceTransformer', () => {
             projectLocator: new GoogleProjectLocatorByConfig("project"),
             componentLabel: 'component',
             ownerLabel: 'owner',
+            systemLabel: 'system',
             resourceType: 'SQL',
             suffix: "sql",
             resourceTransformer: defaultDatabaseResourceTransformer,
@@ -36,6 +37,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 userLabels: {
                     [config.ownerLabel]: 'owner',
                     [config.componentLabel]: 'my-service',
+                    [config.systemLabel]: 'system',
                 }
             }
         }
@@ -66,7 +68,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/owner',
-                    type: 'SQL'
+                    type: 'SQL',
+                    system: 'default/system',
                 }
             })
         })
@@ -77,6 +80,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'component',
                 ownerLabel: 'ownerNotPresent',
+                systemLabel: 'system',
                 resourceType: 'SQL',
                 suffix: "sql",
                 resourceTransformer: defaultDatabaseResourceTransformer,
@@ -112,7 +116,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/unknown',
-                    type: 'SQL'
+                    type: 'SQL',
+                    system: 'default/system',
                 }
             })
         })
@@ -123,6 +128,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'componentNotPresent',
                 ownerLabel: 'owner',
+                systemLabel: 'system',
                 resourceType: 'SQL',
                 suffix: "sql",
                 resourceTransformer: defaultDatabaseResourceTransformer,
@@ -155,7 +161,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     owner: 'default/owner',
-                    type: 'SQL'
+                    type: 'SQL',
+                    system: 'default/system',
                 }
             })
         })
@@ -173,7 +180,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                     annotations: {
                         [ANNOTATION_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
                         [ANNOTATION_ORIGIN_LOCATION]: `google-sql-database-entity-provider:${config.id}`,
-                        
+
                     },
                     name: 'database-name-sql',
                     title: "database-name-sql",
@@ -181,7 +188,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     owner: 'default/unknown',
-                    type: 'SQL'
+                    type: 'SQL',
+                    system: undefined,
                 }
             })
         })
@@ -192,6 +200,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'component',
                 ownerLabel: 'owner',
+                systemLabel: 'system',
                 resourceType: 'SQL',
                 suffix: "sql",
                 resourceTransformer: defaultDatabaseResourceTransformer,
@@ -228,7 +237,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/owner',
-                    type: 'SQL'
+                    type: 'SQL',
+                    system: 'default/system',
                 }
             })
         })
@@ -240,6 +250,7 @@ describe('defaultDatabaseResourceTransformer', () => {
             projectLocator: new GoogleProjectLocatorByConfig("project"),
             componentLabel: 'component',
             ownerLabel: 'owner',
+            systemLabel: 'system',
             resourceType: 'redis',
             suffix: "memorystore",
             resourceTransformer: defaultRedisResourceTransformer,
@@ -258,6 +269,7 @@ describe('defaultDatabaseResourceTransformer', () => {
             labels: {
                 [config.ownerLabel]: 'owner',
                 [config.componentLabel]: 'my-service',
+                [config.systemLabel]: 'system',
             }
         }
 
@@ -285,7 +297,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/owner',
-                    type: 'redis'
+                    type: 'redis',
+                    system: 'default/system',
                 }
             })
         })
@@ -296,6 +309,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'component',
                 ownerLabel: 'otherOwner',
+                systemLabel: 'system',
                 resourceType: 'redis',
                 suffix: "memorystore",
                 resourceTransformer: defaultRedisResourceTransformer,
@@ -306,7 +320,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 disabled: true,
                 namespaceByProject: false
             }
-    
+
 
             const result = config.resourceTransformer(localConfig, database);
             expect(result).toEqual({
@@ -330,7 +344,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/unknown',
-                    type: 'redis'
+                    type: 'redis',
+                    system: 'default/system',
                 }
             })
         })
@@ -341,6 +356,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'otherComponent',
                 ownerLabel: 'owner',
+                systemLabel: 'system',
                 resourceType: 'redis',
                 suffix: "memorystore",
                 resourceTransformer: defaultRedisResourceTransformer,
@@ -351,7 +367,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 disabled: true,
                 namespaceByProject: false
             }
-    
+
 
             const result = config.resourceTransformer(localConfig, database);
             expect(result).toEqual({
@@ -372,7 +388,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     owner: 'default/owner',
-                    type: 'redis'
+                    type: 'redis',
+                    system: 'default/system',
                 }
             })
         })
@@ -400,7 +417,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                 },
                 spec: {
                     owner: 'default/unknown',
-                    type: 'redis'
+                    type: 'redis',
+                    system: undefined,
                 }
             })
         })
@@ -411,6 +429,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 projectLocator: new GoogleProjectLocatorByConfig("project"),
                 componentLabel: 'component',
                 ownerLabel: 'owner',
+                systemLabel: 'system',
                 resourceType: 'redis',
                 suffix: "memorystore",
                 resourceTransformer: defaultRedisResourceTransformer,
@@ -421,7 +440,7 @@ describe('defaultDatabaseResourceTransformer', () => {
                 disabled: true,
                 namespaceByProject: true
             }
-    
+
 
             const result = config.resourceTransformer(localConfig, database);
             expect(result).toEqual({
@@ -446,7 +465,8 @@ describe('defaultDatabaseResourceTransformer', () => {
                         'component:default/my-service'
                     ],
                     owner: 'default/owner',
-                    type: 'redis'
+                    type: 'redis',
+                    system: 'default/system',
                 }
             })
         })

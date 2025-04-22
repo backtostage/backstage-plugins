@@ -1,4 +1,3 @@
-
 import { TaskScheduleDefinitionConfig } from '@backstage/backend-tasks';
 
 export interface Config {
@@ -23,6 +22,12 @@ export interface Config {
          */
         componentLabel?: string;
 
+        /**
+         * (Optional) The provider will look for user defined labels to find the Resource system.
+         * Default: `system`.
+         */
+        systemLabel?: string;
+
         cloudsql?: {
           /**
            * (Optional) The provider will set the Resource type based in this information.
@@ -33,7 +38,7 @@ export interface Config {
           disabled?: boolean;
           namespaceByProject?: boolean;
         },
-        
+
         redis?: {
           /**
            * (Optional) The provider will set the Resource type based in this information.

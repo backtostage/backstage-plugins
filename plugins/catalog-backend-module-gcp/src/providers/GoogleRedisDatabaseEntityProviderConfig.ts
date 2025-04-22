@@ -15,6 +15,7 @@ export type GoogleRedisDatabaseEntityProviderConfig = {
     location?: string
     ownerLabel: string
     componentLabel: string
+    systemLabel: string
     resourceType: string
     suffix: string
     namespaceByProject: boolean
@@ -46,6 +47,7 @@ export function readProviderConfig(
     const id = config.getOptionalString("project") ?? 'organization';
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
+    const systemLabel = config.getOptionalString('systemLabel') ?? 'system'
     const resourceType = config.getOptionalString('redis.resourceType') ?? 'Memorystore Redis'
     const suffix = config.getOptionalString('redis.suffix') ?? 'redis'
     const location = config.getOptionalString('redis.location')
@@ -59,6 +61,7 @@ export function readProviderConfig(
         id,
         ownerLabel,
         componentLabel,
+        systemLabel,
         resourceType,
         suffix,
         namespaceByProject,
