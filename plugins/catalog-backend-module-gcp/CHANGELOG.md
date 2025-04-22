@@ -1,5 +1,11 @@
 # @backtostage/plugin-catalog-backend-module-gcp
 
+## 0.3.0
+
+### Minor Changes
+
+- [#254](https://github.com/backtostage/backstage-plugins/pull/254) [`b9aadf4c4956f0e91ab56e4f9fa8731b907d513e`](https://github.com/backtostage/backstage-plugins/commit/b9aadf4c4956f0e91ab56e4f9fa8731b907d513e) Thanks [@tdabasinskas](https://github.com/tdabasinskas)! - Add support for mapping Resources to Systems via systemLabel
+
 ## 0.2.5
 
 ### Patch Changes
