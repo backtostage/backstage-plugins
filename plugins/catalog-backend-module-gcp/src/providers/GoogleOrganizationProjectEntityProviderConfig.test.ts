@@ -103,26 +103,34 @@ describe('readProviderConfigs', () => {
       position: 0,
       ownerLabel: 'owner',
       componentLabel: 'component',
+      systemLabel: 'system',
       resourceType: 'GCP Project',
       resourceTransformer: expect.any(Function),
       schedule: {
         frequency: { minutes: 10 },
         timeout: { minutes: 3 },
+        initialDelay: undefined,
+        scope: undefined
       },
       disabled: false,
+      query: undefined
     });
 
     expect(providerConfigs[1]).toEqual({
       position: 1,
       ownerLabel: 'team',
       componentLabel: 'app',
+      systemLabel: 'system',
       resourceType: 'Project',
       resourceTransformer: expect.any(Function),
-      disabled: false,
       schedule: {
         frequency: { minutes: 30 },
         timeout: { minutes: 3 },
+        initialDelay: undefined,
+        scope: undefined
       },
+      disabled: false,
+      query: undefined
     });
   });
 });

@@ -14,6 +14,7 @@ export type GoogleSQLDatabaseEntityProviderConfig = {
     projectLocator: GoogleProjectLocator
     ownerLabel: string
     componentLabel: string
+    systemLabel: string
     resourceType: string
     suffix: string
     namespaceByProject: boolean
@@ -46,6 +47,7 @@ export function readProviderConfig(
     const id = config.getOptionalString("project") ?? 'organization';
     const ownerLabel = config.getOptionalString('ownerLabel') ?? 'owner'
     const componentLabel = config.getOptionalString('componentLabel') ?? 'component'
+    const systemLabel = config.getOptionalString('systemLabel') ?? 'system'
     const resourceType = config.getOptionalString('cloudsql.resourceType') ?? 'CloudSQL'
     const suffix = config.getOptionalString('cloudsql.suffix') ?? 'cloudsql'
     const disabled = config.getOptionalBoolean('cloudsql.disabled') || false;
@@ -58,6 +60,7 @@ export function readProviderConfig(
         projectLocator: getProjectLocator(config),
         ownerLabel,
         componentLabel,
+        systemLabel,
         resourceType,
         suffix,
         resourceTransformer: resourceTransformer ?? defaultDatabaseResourceTransformer,
@@ -66,4 +69,3 @@ export function readProviderConfig(
         namespaceByProject
     }
 }
-

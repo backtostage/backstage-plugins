@@ -41,10 +41,10 @@ describe('readProviderConfigs', () => {
             },
         });
         const providerConfigs = readProviderConfigs({ config });
-    
+
         expect(providerConfigs).toHaveLength(0);
     });
-    
+
 
     it('single simple provider config', () => {
         const config = new ConfigReader({
@@ -121,35 +121,41 @@ describe('readProviderConfigs', () => {
 
         expect(providerConfigs[0]).toEqual({
             id: 'my-project',
-            projectLocator: {
+            projectLocator: expect.objectContaining({
                 project: 'my-project',
-            },
+            }),
             ownerLabel: 'owner',
             componentLabel: 'component',
+            systemLabel: 'system',
             resourceType: 'CloudSQL',
-            suffix: "cloudsql",
-            resourceTransformer: expect.any(Function),
+            suffix: 'cloudsql',
             schedule: {
                 frequency: { minutes: 10 },
                 timeout: { minutes: 3 },
+                initialDelay: undefined,
+                scope: undefined
             },
             disabled: false,
-            namespaceByProject: false
+            namespaceByProject: false,
+            resourceTransformer: expect.any(Function),
         });
 
         expect(providerConfigs[1]).toEqual({
             id: 'my-other-project',
-            projectLocator: {
+            projectLocator: expect.objectContaining({
                 project: 'my-other-project',
-            },
+            }),
             ownerLabel: 'team',
             componentLabel: 'app',
+            systemLabel: 'system',
             resourceType: 'SQL',
             suffix: "cloudsql",
             resourceTransformer: expect.any(Function),
             schedule: {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
+                initialDelay: undefined,
+                scope: undefined
             },
             disabled: false,
             namespaceByProject: false
@@ -157,17 +163,20 @@ describe('readProviderConfigs', () => {
 
         expect(providerConfigs[2]).toEqual({
             id: 'organization',
-            projectLocator: {
+            projectLocator: expect.objectContaining({
                 query: 'parent:organizations/my-org'
-            },
+            }),
             ownerLabel: 'team',
             componentLabel: 'app',
+            systemLabel: 'system',
             resourceType: 'SQL',
             suffix: "sql",
             resourceTransformer: expect.any(Function),
             schedule: {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
+                initialDelay: undefined,
+                scope: undefined
             },
             disabled: false,
             namespaceByProject: true

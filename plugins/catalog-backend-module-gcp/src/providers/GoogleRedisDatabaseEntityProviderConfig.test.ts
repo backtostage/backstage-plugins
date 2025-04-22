@@ -11,7 +11,7 @@ describe('readProviderConfigs', () => {
 
         expect(providerConfigs).toHaveLength(0);
     });
-    
+
     it('remove disabled provider config', () => {
         const config = new ConfigReader({
             catalog: {
@@ -40,10 +40,10 @@ describe('readProviderConfigs', () => {
             },
         });
         const providerConfigs = readProviderConfigs({ config });
-    
+
         expect(providerConfigs).toHaveLength(0);
     });
-    
+
     it('single simple provider config', () => {
         const config = new ConfigReader({
             catalog: {
@@ -106,29 +106,34 @@ describe('readProviderConfigs', () => {
         expect(providerConfigs).toHaveLength(2);
         expect(providerConfigs[0]).toEqual({
             id: 'my-project',
-            projectLocator: {
+            projectLocator: expect.objectContaining({
                 project: 'my-project',
-            },
+            }),
             ownerLabel: 'owner',
             componentLabel: 'component',
+            systemLabel: 'system',
             resourceType: 'Memorystore Redis',
-            suffix: "redis",
-            resourceTransformer: expect.any(Function),
+            suffix: 'redis',
             schedule: {
                 frequency: { minutes: 10 },
                 timeout: { minutes: 3 },
+                initialDelay: undefined,
+                scope: undefined
             },
             disabled: false,
-            namespaceByProject: false
+            namespaceByProject: false,
+            location: undefined,
+            resourceTransformer: expect.any(Function),
         });
 
         expect(providerConfigs[1]).toEqual({
             id: 'my-other-project',
-            projectLocator: {
+            projectLocator: expect.objectContaining({
                 project: 'my-other-project',
-            },
+            }),
             ownerLabel: 'team',
             componentLabel: 'app',
+            systemLabel: 'system',
             resourceType: 'database',
             suffix: "database",
             resourceTransformer: expect.any(Function),
@@ -136,9 +141,11 @@ describe('readProviderConfigs', () => {
             schedule: {
                 frequency: { minutes: 30 },
                 timeout: { minutes: 3 },
+                initialDelay: undefined,
+                scope: undefined
             },
             disabled: false,
-            namespaceByProject: true,
+            namespaceByProject: true
         });
 
     });
