@@ -56,7 +56,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [{
+                    gcpResources: [{
                         project: 'project',
                         schedule: {
                             frequency: { minutes: 30 },
@@ -83,7 +83,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [
+                    gcpResources: [
                         {
                             project: 'myProvider',
                             schedule: {
@@ -121,7 +121,7 @@ describe('GoogleSQLDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [{
+                    gcpResources: [{
                         project: 'myProvider',
                         schedule: {
                             frequency: { minutes: 30 },
