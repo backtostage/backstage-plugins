@@ -16,7 +16,7 @@ describe('readProviderConfigs', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [
+                    gcpResources: [
                         {
                             project: 'my-project',
                             redis: { disabled: true },
@@ -48,7 +48,7 @@ describe('readProviderConfigs', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [
+                    gcpResources: [
                         {
                             project: 'my-project',
                             schedule: {
@@ -79,7 +79,7 @@ describe('readProviderConfigs', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [
+                    gcpResources: [
                         {
                             project: 'my-project',
                             schedule: {

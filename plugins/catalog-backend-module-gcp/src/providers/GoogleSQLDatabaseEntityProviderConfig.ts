@@ -29,7 +29,14 @@ export function readProviderConfigs(options: {
     resourceTransformer?: GoogleDatabaseResourceTransformer
 }): GoogleSQLDatabaseEntityProviderConfig[] {
 
-    const providersConfig = options.config.getOptionalConfigArray('catalog.providers.gcp');
+    // Try the new config key first for backward compatibility
+    let providersConfig = options.config.getOptionalConfigArray('catalog.providers.gcpResources');
+    
+    // Fall back to the old config key if the new one is not found
+    if (!providersConfig) {
+        providersConfig = options.config.getOptionalConfigArray('catalog.providers.gcp');
+    }
+    
     if (!providersConfig) {
         return [];
     }

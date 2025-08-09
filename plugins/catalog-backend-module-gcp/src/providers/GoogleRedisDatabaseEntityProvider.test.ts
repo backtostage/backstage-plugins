@@ -56,7 +56,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [{
+                    gcpResources: [{
                         project: 'project',
                         schedule: {
                             frequency: { minutes: 30 },
@@ -83,7 +83,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [
+                    gcpResources: [
                         {
                             project: 'myProvider',
                             schedule: {
@@ -124,7 +124,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [{
+                    gcpResources: [{
                         project: 'myProvider',
                         schedule: {
                             frequency: { minutes: 30 },
@@ -251,7 +251,7 @@ describe('GoogleRedisDatabaseEntityProvider', () => {
         const config = new ConfigReader({
             catalog: {
                 providers: {
-                    gcp: [{
+                    gcpResources: [{
                         project: 'myProvider',
                         schedule: {
                             frequency: { minutes: 30 },

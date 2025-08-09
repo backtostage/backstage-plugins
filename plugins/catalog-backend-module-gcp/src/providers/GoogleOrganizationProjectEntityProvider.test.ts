@@ -57,7 +57,7 @@ describe('GoogleOrganizationProjectEntityProvider', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               schedule: {
                 frequency: { minutes: 30 },
@@ -87,7 +87,7 @@ describe('GoogleOrganizationProjectEntityProvider', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               schedule: {
                 frequency: { minutes: 30 },
@@ -136,7 +136,7 @@ describe('GoogleOrganizationProjectEntityProvider', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               schedule: {
                 frequency: { minutes: 30 },
@@ -276,7 +276,7 @@ describe('GoogleOrganizationProjectEntityProvider', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               schedule: {
                 frequency: { minutes: 30 },

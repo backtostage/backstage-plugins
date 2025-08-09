@@ -61,12 +61,15 @@ Once generated, store the path to this file in the `GOOGLE_APPLICATION_CREDENTIA
 
 You can find more details about this in the [official docs](https://cloud.google.com/nodejs/docs/reference/google-auth-library/latest#impersonated-credentials-client)
 
-Then you can add a `gcp` config to the catalog providers configuration:
+Then you can add a `gcpResources` config to the catalog providers configuration:
+
+> **Note**: The configuration key `catalog.providers.gcpResources` is recommended to avoid conflicts with the official Backstage GCP module. 
+> For backward compatibility, `catalog.providers.gcp` is still supported but deprecated.
 
 ```yaml
 catalog:
   providers:
-    gcp:
+    gcpResources:
       # the project id need to be the GCP Project where your Resources are present
       - project: my-gcp-project-id
         ownerLabel: team # string

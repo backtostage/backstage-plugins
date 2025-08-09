@@ -15,7 +15,7 @@ describe('readProviderConfigs', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               project: 'xpto',
               schedule: {
@@ -45,7 +45,7 @@ describe('readProviderConfigs', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               organization: {
                 query: 'parent:organizations/123',
@@ -74,7 +74,7 @@ describe('readProviderConfigs', () => {
     const config = new ConfigReader({
       catalog: {
         providers: {
-          gcp: [
+          gcpResources: [
             {
               schedule: {
                 frequency: { minutes: 10 },
@@ -132,5 +132,64 @@ describe('readProviderConfigs', () => {
       disabled: false,
       query: undefined
     });
+  });
+
+  it('backward compatibility - reads from old gcp key', () => {
+    const config = new ConfigReader({
+      catalog: {
+        providers: {
+          gcp: [
+            {
+              organization: {
+                query: 'parent:organizations/123',
+              },
+              schedule: {
+                frequency: { minutes: 30 },
+                timeout: { minutes: 3 },
+              },
+            },
+          ],
+        },
+      },
+    });
+    const providerConfigs = readProviderConfigs({ config });
+
+    expect(providerConfigs).toHaveLength(1);
+    expect(providerConfigs[0].query).toEqual('parent:organizations/123');
+  });
+
+  it('prefers gcpResources over gcp when both exist', () => {
+    const config = new ConfigReader({
+      catalog: {
+        providers: {
+          gcpResources: [
+            {
+              organization: {
+                query: 'parent:organizations/new',
+              },
+              schedule: {
+                frequency: { minutes: 30 },
+                timeout: { minutes: 3 },
+              },
+            },
+          ],
+          gcp: [
+            {
+              organization: {
+                query: 'parent:organizations/old',
+              },
+              schedule: {
+                frequency: { minutes: 30 },
+                timeout: { minutes: 3 },
+              },
+            },
+          ],
+        },
+      },
+    });
+    const providerConfigs = readProviderConfigs({ config });
+
+    expect(providerConfigs).toHaveLength(1);
+    expect(providerConfigs[0].query).toEqual('parent:organizations/new');
   });
 });
