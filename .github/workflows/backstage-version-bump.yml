@@ -28,6 +28,7 @@ jobs:
         with:
           fetch-depth: 1
 
+      - run: corepack enable
       # Beginning of yarn setup
       - name: use node.js 20.x
         uses: actions/setup-node@v4

@@ -51,3 +51,12 @@ site
 *.session.sql
 credentials.json
 database.json
+
+# Yarn files
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
