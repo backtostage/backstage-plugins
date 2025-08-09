@@ -44,7 +44,7 @@
     "@backstage/plugin-techdocs-backend": "backstage:^",
     "@backtostage/plugin-catalog-backend-module-gcp": "^0.3.0",
     "app": "link:../app",
-    "better-sqlite3": "^11.3.0",
+    "better-sqlite3": "^12.2.0",
     "dockerode": "^4.0.0",
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
